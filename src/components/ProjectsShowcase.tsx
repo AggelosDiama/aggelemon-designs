@@ -29,7 +29,7 @@ const projects = [
 
 export const ProjectsShowcase = () => {
   return (
-    <section className="py-20 px-4 animate-fade-in">
+    <section className="py-20 px-4 animate-fade-in bg-muted/30">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-heading text-center mb-12">
           Featured Projects

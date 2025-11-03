@@ -9,6 +9,10 @@ import AITutor from "./pages/projects/AITutor";
 import TravelApp from "./pages/projects/TravelApp";
 import MakeDisCount from "./pages/projects/MakeDisCount";
 import TeamWebsite from "./pages/projects/TeamWebsite";
+import UIUXProjects from "./pages/UIUXProjects";
+import GraphicDesign from "./pages/GraphicDesign";
+import AITools from "./pages/AITools";
+import About from "./pages/About";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +24,10 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/uiux-projects" element={<UIUXProjects />} />
+          <Route path="/graphic-design" element={<GraphicDesign />} />
+          <Route path="/ai-tools" element={<AITools />} />
+          <Route path="/about" element={<About />} />
           <Route path="/projects/ai-tutor" element={<AITutor />} />
           <Route path="/projects/travel-app" element={<TravelApp />} />
           <Route path="/projects/makediscount" element={<MakeDisCount />} />
