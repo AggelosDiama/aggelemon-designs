@@ -1,26 +1,26 @@
 import profilePhoto from "@/assets/profile-original.jpg";
+import { Button } from "@/components/ui/button";
+import { ChevronDown } from "lucide-react";
 
 export const Hero = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 py-20 animate-fade-in">
-      <div className="max-w-6xl w-full">
-        <div className="max-w-4xl mx-auto">
+    <section className="min-h-screen flex flex-col items-center justify-center px-4 py-20 animate-fade-in relative">
+      <div className="max-w-6xl w-full flex-1 flex items-center">
+        <div className="max-w-4xl mx-auto w-full">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
             {/* Profile Image */}
-          <div className="flex-shrink-0">
-              <div className="relative w-64 h-64 md:w-80 md:h-80">
-                <div className="absolute inset-0 rounded-full bg-lemon overflow-visible shadow-xl">
-                  <img 
-                    src={profilePhoto} 
-                    alt="Aggelos Diamantopoulos - Lemon" 
-                    className="w-full h-full object-cover object-top scale-125 -translate-y-6 mix-blend-multiply"
-                  />
-                </div>
+            <div className="flex-shrink-0">
+              <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-lemon shadow-lg">
+                <img 
+                  src={profilePhoto} 
+                  alt="Aggelos Diamantopoulos - Lemon" 
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
             </div>
 
             {/* Hero Text */}
-            <div className="flex-1 text-center md:text-left space-y-4">
+            <div className="flex-1 text-center md:text-left space-y-6">
               <h1 className="text-4xl md:text-6xl font-bold text-heading">
                 I'm Aggelos, you can call me <span className="highlight">Lemon</span>
               </h1>
@@ -33,9 +33,24 @@ export const Hero = () => {
                 Driven by curiosity, inspired by community, and always ready to{" "}
                 <span className="highlight">squeeze the most out of design</span>. Explore my work below!
               </p>
+              <div className="pt-2">
+                <Button 
+                  size="lg" 
+                  className="bg-heading hover:bg-heading/90 text-white"
+                  onClick={() => window.location.href = 'mailto:aggelosdiama@gmail.com'}
+                >
+                  Get in Touch
+                </Button>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+      
+      {/* Scroll Indicator */}
+      <div className="flex flex-col items-center gap-2 pb-8 animate-fade-in">
+        <p className="text-sm text-muted-foreground">Check my projects</p>
+        <ChevronDown className="w-6 h-6 text-muted-foreground animate-bounce" />
       </div>
     </section>
   );
