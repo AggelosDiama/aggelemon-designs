@@ -1,3 +1,5 @@
+import profilePhoto from "@/assets/profile-original.jpg";
+
 export const Hero = () => {
   return (
     <section className="min-h-screen flex items-center justify-center px-4 py-20 animate-fade-in">
@@ -5,11 +7,14 @@ export const Hero = () => {
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
             {/* Profile Image */}
-            <div className="flex-shrink-0">
-              <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-card shadow-lg">
-                {/* Placeholder for profile photo */}
-                <div className="w-full h-full bg-card flex items-center justify-center text-6xl">
-                  🍋
+          <div className="flex-shrink-0">
+              <div className="relative w-64 h-64 md:w-80 md:h-80">
+                <div className="absolute inset-0 rounded-full bg-lemon overflow-visible shadow-xl">
+                  <img 
+                    src={profilePhoto} 
+                    alt="Aggelos Diamantopoulos - Lemon" 
+                    className="w-full h-full object-cover object-top scale-125 -translate-y-6 mix-blend-multiply"
+                  />
                 </div>
               </div>
             </div>
