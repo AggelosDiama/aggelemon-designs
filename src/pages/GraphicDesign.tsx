@@ -1,7 +1,52 @@
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { ProjectCard } from "@/components/ProjectCard";
+
+interface Project {
+  title: string;
+  tags: string[];
+  slug: string;
+  image_url: string;
+}
 
 const GraphicDesign = () => {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  const fetchProjects = async () => {
+    const { data, error } = await supabase
+      .from("projects")
+      .select("title, tags, slug, image_url")
+      .eq("category", "Graphic Design")
+      .order("year", { ascending: false })
+      .order("month", { ascending: false });
+
+    if (!error && data) {
+      setProjects(data.map(p => ({ ...p, image: p.image_url })));
+    }
+    setLoading(false);
+  };
+
+  if (loading) {
+    return (
+      <main className="min-h-screen">
+        <Header />
+        <section className="py-20 px-4">
+          <div className="max-w-6xl mx-auto text-center">
+            <p className="text-muted-foreground">Loading projects...</p>
+          </div>
+        </section>
+        <Footer />
+      </main>
+    );
+  }
+
   return (
     <main className="min-h-screen">
       <Header />
@@ -13,12 +58,21 @@ const GraphicDesign = () => {
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
             Bold visual storytelling through graphics, branding, and creative design.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Placeholder for graphic design projects */}
-            <div className="aspect-square bg-muted rounded-lg flex items-center justify-center">
-              <p className="text-muted-foreground">Project coming soon</p>
+          {projects.length === 0 ? (
+            <p className="text-center text-muted-foreground">No projects found in this category yet.</p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {projects.map((project, index) => (
+                <div
+                  key={project.slug}
+                  className="animate-fade-in-up"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <ProjectCard {...project} image={project.image_url} />
+                </div>
+              ))}
             </div>
-          </div>
+          )}
         </div>
       </section>
       <Footer />

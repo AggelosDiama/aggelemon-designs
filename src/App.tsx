@@ -13,6 +13,9 @@ import UIUXProjects from "./pages/UIUXProjects";
 import GraphicDesign from "./pages/GraphicDesign";
 import AITools from "./pages/AITools";
 import About from "./pages/About";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +31,9 @@ const App = () => (
           <Route path="/graphic-design" element={<GraphicDesign />} />
           <Route path="/ai-tools" element={<AITools />} />
           <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="/projects/ai-tutor" element={<AITutor />} />
           <Route path="/projects/travel-app" element={<TravelApp />} />
           <Route path="/projects/makediscount" element={<MakeDisCount />} />
