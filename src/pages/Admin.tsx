@@ -300,23 +300,24 @@ const Admin = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="fullContent">Full Content *</Label>
+              <Label htmlFor="fullContent">Full Content (Markdown) *</Label>
               <Textarea
                 id="fullContent"
                 value={fullContent}
                 onChange={(e) => setFullContent(e.target.value)}
                 required
                 rows={10}
+                placeholder="Use markdown formatting: ## Headings, **bold**, *italic*, etc."
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="tags">Tags (comma-separated)</Label>
+              <Label htmlFor="tags">Tools Used (comma-separated)</Label>
               <Input
                 id="tags"
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
-                placeholder="React, UI/UX, 2024"
+                placeholder="Figma, Adobe XD, React, TypeScript"
               />
             </div>
 
