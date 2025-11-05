@@ -8,6 +8,7 @@ interface Project {
   slug: string;
   image_url: string;
   short_description: string;
+  category: string;
 }
 
 export const ProjectsShowcase = () => {
@@ -21,7 +22,7 @@ export const ProjectsShowcase = () => {
   const fetchFeaturedProjects = async () => {
     const { data, error } = await supabase
       .from("projects")
-      .select("title, tags, slug, image_url, short_description")
+      .select("title, tags, slug, image_url, short_description, category")
       .eq("featured", true)
       .order("created_at", { ascending: false });
 
@@ -53,7 +54,7 @@ export const ProjectsShowcase = () => {
               className="animate-fade-in-up"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <ProjectCard {...project} image={project.image_url} short_description={project.short_description} />
+              <ProjectCard {...project} image={project.image_url} short_description={project.short_description} category={project.category} showCategory={true} />
             </div>
           ))}
         </div>

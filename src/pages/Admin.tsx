@@ -52,6 +52,12 @@ const Admin = () => {
   const [tags, setTags] = useState("");
   const [slug, setSlug] = useState("");
 
+  const MAX_SHORT_DESC_WORDS = 30;
+
+  const getWordCount = (text: string) => {
+    return text.trim().split(/\s+/).filter(Boolean).length;
+  };
+
   useEffect(() => {
     checkUser();
     fetchProjects();
@@ -101,6 +107,17 @@ const Admin = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validate short description word count
+    const wordCount = getWordCount(shortDescription);
+    if (wordCount > MAX_SHORT_DESC_WORDS) {
+      toast({
+        variant: "destructive",
+        title: "Short description too long",
+        description: `Please keep it to ${MAX_SHORT_DESC_WORDS} words or less. Current: ${wordCount} words.`,
+      });
+      return;
+    }
 
     let finalImageUrl = imageUrl;
 
@@ -341,7 +358,7 @@ const Admin = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="shortDescription">Short Description *</Label>
+              <Label htmlFor="shortDescription">Short Description * (max {MAX_SHORT_DESC_WORDS} words)</Label>
               <Textarea
                 id="shortDescription"
                 value={shortDescription}
@@ -349,6 +366,9 @@ const Admin = () => {
                 required
                 rows={3}
               />
+              <p className={`text-sm ${getWordCount(shortDescription) > MAX_SHORT_DESC_WORDS ? 'text-destructive' : 'text-muted-foreground'}`}>
+                {getWordCount(shortDescription)} / {MAX_SHORT_DESC_WORDS} words
+              </p>
             </div>
 
             <div className="space-y-2">
