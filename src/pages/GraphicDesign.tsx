@@ -9,6 +9,7 @@ interface Project {
   tags: string[];
   slug: string;
   image_url: string;
+  short_description: string;
 }
 
 const GraphicDesign = () => {
@@ -22,7 +23,7 @@ const GraphicDesign = () => {
   const fetchProjects = async () => {
     const { data, error } = await supabase
       .from("projects")
-      .select("title, tags, slug, image_url")
+      .select("title, tags, slug, image_url, short_description")
       .eq("category", "Graphic Design")
       .order("year", { ascending: false })
       .order("month", { ascending: false });
@@ -68,7 +69,7 @@ const GraphicDesign = () => {
                   className="animate-fade-in-up"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <ProjectCard {...project} image={project.image_url} />
+                  <ProjectCard {...project} image={project.image_url} short_description={project.short_description} />
                 </div>
               ))}
             </div>

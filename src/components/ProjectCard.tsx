@@ -6,9 +6,10 @@ interface ProjectCardProps {
   tags: string[];
   slug: string;
   image: string;
+  short_description: string;
 }
 
-export const ProjectCard = ({ title, tags, slug, image }: ProjectCardProps) => {
+export const ProjectCard = ({ title, tags, slug, image, short_description }: ProjectCardProps) => {
   return (
     <Link to={`/projects/${slug}`}>
       <div className="bg-card rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
@@ -29,8 +30,8 @@ export const ProjectCard = ({ title, tags, slug, image }: ProjectCardProps) => {
             </h3>
             <ArrowRight className="w-6 h-6 text-lemon group-hover:translate-x-2 transition-transform" />
           </div>
-          <div className="flex flex-wrap gap-2">
-            {tags.map((tag) => (
+          <div className="flex flex-wrap gap-2 mb-3">
+            {tags.slice(0, 4).map((tag) => (
               <span
                 key={tag}
                 className="px-3 py-1 text-sm rounded-full bg-muted text-foreground"
@@ -39,6 +40,9 @@ export const ProjectCard = ({ title, tags, slug, image }: ProjectCardProps) => {
               </span>
             ))}
           </div>
+          <p className="text-sm text-muted-foreground line-clamp-2">
+            {short_description}
+          </p>
         </div>
       </div>
     </Link>
