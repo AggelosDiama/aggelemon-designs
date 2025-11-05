@@ -48,6 +48,7 @@ const Admin = () => {
   const [category, setCategory] = useState<string>("UI/UX Design");
   const [featured, setFeatured] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [tags, setTags] = useState("");
   const [slug, setSlug] = useState("");
 
@@ -92,6 +93,7 @@ const Admin = () => {
     setCategory("UI/UX Design");
     setFeatured(false);
     setImageUrl("");
+    setImageFile(null);
     setTags("");
     setSlug("");
     setEditingProject(null);
@@ -99,6 +101,35 @@ const Admin = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    let finalImageUrl = imageUrl;
+
+    // Upload image file if provided
+    if (imageFile) {
+      const fileExt = imageFile.name.split(".").pop();
+      const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`;
+      const filePath = fileName;
+
+      const { error: uploadError, data } = await supabase.storage
+        .from("project-images")
+        .upload(filePath, imageFile);
+
+      if (uploadError) {
+        toast({
+          variant: "destructive",
+          title: "Error uploading image",
+          description: uploadError.message,
+        });
+        return;
+      }
+
+      // Get public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from("project-images")
+        .getPublicUrl(filePath);
+
+      finalImageUrl = publicUrl;
+    }
 
     const projectData = {
       title,
@@ -108,7 +139,7 @@ const Admin = () => {
       full_content: fullContent,
       category,
       featured,
-      image_url: imageUrl,
+      image_url: finalImageUrl,
       tags: tags.split(",").map((t) => t.trim()).filter(Boolean),
       slug: slug || title.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
     };
@@ -163,6 +194,7 @@ const Admin = () => {
     setCategory(project.category);
     setFeatured(project.featured);
     setImageUrl(project.image_url);
+    setImageFile(null);
     setTags(project.tags.join(", "));
     setSlug(project.slug);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -278,13 +310,33 @@ const Admin = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="imageUrl">Image URL</Label>
+                <Label htmlFor="imageFile">Project Image</Label>
                 <Input
-                  id="imageUrl"
-                  value={imageUrl}
-                  onChange={(e) => setImageUrl(e.target.value)}
-                  placeholder="https://..."
+                  id="imageFile"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      setImageFile(file);
+                      setImageUrl(""); // Clear URL if file is selected
+                    }
+                  }}
                 />
+                {(imageUrl || imageFile) && (
+                  <div className="mt-2">
+                    <p className="text-sm text-muted-foreground mb-2">
+                      {imageFile ? `Selected: ${imageFile.name}` : "Current image URL set"}
+                    </p>
+                    {imageUrl && !imageFile && (
+                      <img
+                        src={imageUrl}
+                        alt="Preview"
+                        className="w-32 h-32 object-cover rounded border"
+                      />
+                    )}
+                  </div>
+                )}
               </div>
             </div>
 
