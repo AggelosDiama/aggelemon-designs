@@ -14,6 +14,44 @@ export type Database = {
   }
   public: {
     Tables: {
+      project_content_blocks: {
+        Row: {
+          block_type: Database["public"]["Enums"]["content_block_type"]
+          content: Json
+          created_at: string
+          id: string
+          order_index: number
+          project_id: string
+          updated_at: string
+        }
+        Insert: {
+          block_type: Database["public"]["Enums"]["content_block_type"]
+          content?: Json
+          created_at?: string
+          id?: string
+          order_index: number
+          project_id: string
+          updated_at?: string
+        }
+        Update: {
+          block_type?: Database["public"]["Enums"]["content_block_type"]
+          content?: Json
+          created_at?: string
+          id?: string
+          order_index?: number
+          project_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_content_blocks_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       projects: {
         Row: {
           category: string
@@ -23,6 +61,7 @@ export type Database = {
           id: string
           image_url: string | null
           month: number
+          project_link: string | null
           short_description: string
           slug: string
           tags: string[] | null
@@ -38,6 +77,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           month: number
+          project_link?: string | null
           short_description: string
           slug: string
           tags?: string[] | null
@@ -53,6 +93,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           month?: number
+          project_link?: string | null
           short_description?: string
           slug?: string
           tags?: string[] | null
@@ -70,7 +111,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      content_block_type: "text" | "image" | "gallery" | "quote" | "separator"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -197,6 +238,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      content_block_type: ["text", "image", "gallery", "quote", "separator"],
+    },
   },
 } as const

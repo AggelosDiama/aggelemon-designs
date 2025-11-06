@@ -3,10 +3,10 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { GlassCard } from "@/components/GlassCard";
 import { ArrowLeft } from "lucide-react";
-import ReactMarkdown from "react-markdown";
 import { useToast } from "@/hooks/use-toast";
+import { ProjectHero } from "@/components/project/ProjectHero";
+import { ContentBlockRenderer } from "@/components/project/ContentBlockRenderer";
 
 interface Project {
   id: string;
@@ -20,6 +20,14 @@ interface Project {
   image_url: string;
   tags: string[];
   slug: string;
+  project_link: string | null;
+}
+
+interface ContentBlock {
+  id: string;
+  block_type: string;
+  order_index: number;
+  content: any;
 }
 
 const ProjectDetail = () => {
@@ -27,6 +35,7 @@ const ProjectDetail = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [project, setProject] = useState<Project | null>(null);
+  const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -44,9 +53,23 @@ const ProjectDetail = () => {
           description: error.message,
         });
         navigate("/");
-      } else {
-        setProject(data);
+        setLoading(false);
+        return;
       }
+
+      setProject(data);
+
+      // Fetch content blocks
+      const { data: blocks, error: blocksError } = await supabase
+        .from("project_content_blocks")
+        .select("*")
+        .eq("project_id", data.id)
+        .order("order_index");
+
+      if (!blocksError && blocks) {
+        setContentBlocks(blocks);
+      }
+
       setLoading(false);
     };
 
@@ -77,108 +100,57 @@ const ProjectDetail = () => {
   return (
     <main className="min-h-screen">
       <Header />
-      <section className="py-12 px-4">
-        <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
+      
+      <section className="pb-20">
+        <ProjectHero
+          title={project.title}
+          shortDescription={project.short_description}
+          coverImage={project.image_url}
+          projectLink={project.project_link || undefined}
+          category={project.category}
+          month={project.month}
+          year={project.year}
+        />
+
+        <div className="max-w-4xl mx-auto px-4 mb-12">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-lemon hover:text-lemon-glow transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
             Back to Home
           </Link>
-
-          <GlassCard glow>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="text-lemon">{project.title}</span>
-            </h1>
-            <div className="flex flex-wrap gap-2 mb-8">
-              <span className="px-3 py-1 text-sm rounded-full bg-lemon/10 text-foreground border border-lemon/20">
-                {project.category}
-              </span>
-              <span className="px-3 py-1 text-sm rounded-full bg-lemon/10 text-foreground border border-lemon/20">
-                {new Date(project.year, project.month - 1).toLocaleString("default", {
-                  month: "long",
-                  year: "numeric",
-                })}
-              </span>
-            </div>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              {project.short_description}
-            </p>
-          </GlassCard>
-
-          {project.image_url && (
-            <GlassCard>
-              <img
-                src={project.image_url}
-                alt={project.title}
-                className="w-full rounded-lg"
-              />
-            </GlassCard>
-          )}
-
-          <GlassCard>
-            <div className="prose prose-invert max-w-none">
-              <ReactMarkdown
-                components={{
-                  h1: ({ children }) => (
-                    <h1 className="text-3xl font-bold text-lemon mb-4 mt-6">{children}</h1>
-                  ),
-                  h2: ({ children }) => (
-                    <h2 className="text-2xl font-bold text-lemon mb-4 mt-6">{children}</h2>
-                  ),
-                  h3: ({ children }) => (
-                    <h3 className="text-xl font-semibold text-foreground mb-3 mt-4">{children}</h3>
-                  ),
-                  p: ({ children }) => (
-                    <p className="text-muted-foreground leading-relaxed mb-4">{children}</p>
-                  ),
-                  ul: ({ children }) => (
-                    <ul className="list-disc list-inside space-y-2 text-muted-foreground mb-4">{children}</ul>
-                  ),
-                  ol: ({ children }) => (
-                    <ol className="list-decimal list-inside space-y-2 text-muted-foreground mb-4">{children}</ol>
-                  ),
-                  strong: ({ children }) => (
-                    <strong className="font-semibold text-foreground">{children}</strong>
-                  ),
-                  em: ({ children }) => (
-                    <em className="italic text-foreground">{children}</em>
-                  ),
-                  blockquote: ({ children }) => (
-                    <blockquote className="border-l-4 border-lemon pl-4 italic text-muted-foreground my-4">
-                      {children}
-                    </blockquote>
-                  ),
-                  code: ({ children }) => (
-                    <code className="bg-lemon/10 px-2 py-1 rounded text-sm font-mono text-foreground">
-                      {children}
-                    </code>
-                  ),
-                }}
-              >
-                {project.full_content}
-              </ReactMarkdown>
-            </div>
-          </GlassCard>
-
-          {project.tags && project.tags.length > 0 && (
-            <GlassCard>
-              <h2 className="text-2xl font-bold text-lemon mb-4">Tools Used</h2>
-              <div className="flex flex-wrap gap-3">
-                {project.tags.map((tool) => (
-                  <span
-                    key={tool}
-                    className="px-4 py-2 rounded-full bg-lemon/10 text-foreground border border-lemon/20"
-                  >
-                    {tool}
-                  </span>
-                ))}
-              </div>
-            </GlassCard>
-          )}
         </div>
+
+        {contentBlocks.length > 0 ? (
+          <ContentBlockRenderer blocks={contentBlocks} />
+        ) : (
+          project.full_content && (
+            <div className="max-w-4xl mx-auto px-4">
+              <div className="prose prose-lg max-w-none">
+                <p className="text-foreground leading-relaxed">{project.full_content}</p>
+              </div>
+            </div>
+          )
+        )}
+
+        {project.tags && project.tags.length > 0 && (
+          <div className="max-w-4xl mx-auto px-4 mt-12">
+            <h2 className="text-2xl font-bold text-heading mb-4">Tools, Technologies & Methodologies</h2>
+            <div className="flex flex-wrap gap-3">
+              {project.tags.map((tool) => (
+                <span
+                  key={tool}
+                  className="px-4 py-2 rounded-lg bg-primary/10 text-foreground border border-primary/20"
+                >
+                  {tool}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
+      
       <Footer />
     </main>
   );

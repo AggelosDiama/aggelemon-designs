@@ -16,6 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { ContentBlockEditor, ContentBlock } from "@/components/admin/ContentBlockEditor";
 
 interface Project {
   id: string;
@@ -29,6 +30,7 @@ interface Project {
   image_url: string;
   tags: string[];
   slug: string;
+  project_link: string | null;
 }
 
 const Admin = () => {
@@ -51,6 +53,8 @@ const Admin = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [tags, setTags] = useState("");
   const [slug, setSlug] = useState("");
+  const [projectLink, setProjectLink] = useState("");
+  const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>([]);
 
   const MAX_SHORT_DESC_WORDS = 30;
 
@@ -102,7 +106,28 @@ const Admin = () => {
     setImageFile(null);
     setTags("");
     setSlug("");
+    setProjectLink("");
+    setContentBlocks([]);
     setEditingProject(null);
+  };
+
+  const uploadImage = async (file: File): Promise<string> => {
+    const fileExt = file.name.split(".").pop();
+    const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("project-images")
+      .upload(fileName, file);
+
+    if (uploadError) {
+      throw new Error(uploadError.message);
+    }
+
+    const { data: { publicUrl } } = supabase.storage
+      .from("project-images")
+      .getPublicUrl(fileName);
+
+    return publicUrl;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -159,7 +184,10 @@ const Admin = () => {
       image_url: finalImageUrl,
       tags: tags.split(",").map((t) => t.trim()).filter(Boolean),
       slug: slug || title.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+      project_link: projectLink || null,
     };
+
+    let projectId = editingProject?.id;
 
     if (editingProject) {
       const { error } = await supabase
@@ -173,16 +201,14 @@ const Admin = () => {
           title: "Error updating project",
           description: error.message,
         });
-      } else {
-        toast({
-          title: "Project updated!",
-          description: "The project has been successfully updated.",
-        });
-        resetForm();
-        fetchProjects();
+        return;
       }
     } else {
-      const { error } = await supabase.from("projects").insert([projectData]);
+      const { data, error } = await supabase
+        .from("projects")
+        .insert([projectData])
+        .select()
+        .single();
 
       if (error) {
         toast({
@@ -190,18 +216,50 @@ const Admin = () => {
           title: "Error creating project",
           description: error.message,
         });
-      } else {
+        return;
+      }
+      projectId = data.id;
+    }
+
+    // Save content blocks
+    if (projectId && contentBlocks.length > 0) {
+      // Delete existing blocks for this project
+      await supabase
+        .from("project_content_blocks")
+        .delete()
+        .eq("project_id", projectId);
+
+      // Insert new blocks
+      const blocksToInsert = contentBlocks.map((block) => ({
+        project_id: projectId,
+        block_type: block.block_type,
+        order_index: block.order_index,
+        content: block.content,
+      }));
+
+      const { error: blocksError } = await supabase
+        .from("project_content_blocks")
+        .insert(blocksToInsert);
+
+      if (blocksError) {
         toast({
-          title: "Project created!",
-          description: "The project has been successfully added.",
+          variant: "destructive",
+          title: "Error saving content blocks",
+          description: blocksError.message,
         });
-        resetForm();
-        fetchProjects();
+        return;
       }
     }
+
+    toast({
+      title: editingProject ? "Project updated!" : "Project created!",
+      description: "The project has been successfully saved.",
+    });
+    resetForm();
+    fetchProjects();
   };
 
-  const handleEdit = (project: Project) => {
+  const handleEdit = async (project: Project) => {
     setEditingProject(project);
     setTitle(project.title);
     setMonth(project.month);
@@ -214,6 +272,19 @@ const Admin = () => {
     setImageFile(null);
     setTags(project.tags.join(", "));
     setSlug(project.slug);
+    setProjectLink(project.project_link || "");
+
+    // Fetch content blocks
+    const { data: blocks } = await supabase
+      .from("project_content_blocks")
+      .select("*")
+      .eq("project_id", project.id)
+      .order("order_index");
+
+    if (blocks) {
+      setContentBlocks(blocks as ContentBlock[]);
+    }
+
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -384,13 +455,28 @@ const Admin = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="tags">Tools Used (comma-separated)</Label>
+              <Label htmlFor="tags">Tools, Technologies & Methodologies (comma-separated) *</Label>
               <Input
                 id="tags"
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
-                placeholder="Figma, Adobe XD, React, TypeScript"
+                placeholder="Figma, Adobe XD, React, TypeScript, Agile"
+                required
               />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="projectLink">Project Link (optional)</Label>
+              <Input
+                id="projectLink"
+                type="url"
+                value={projectLink}
+                onChange={(e) => setProjectLink(e.target.value)}
+                placeholder="https://example.com"
+              />
+              <p className="text-xs text-muted-foreground">
+                If provided, a "Check it here" button will appear on the project page
+              </p>
             </div>
 
             <div className="flex items-center space-x-2">
@@ -402,6 +488,14 @@ const Admin = () => {
               <Label htmlFor="featured" className="cursor-pointer">
                 Featured Project (show on homepage)
               </Label>
+            </div>
+
+            <div className="border-t border-border pt-6">
+              <ContentBlockEditor
+                blocks={contentBlocks}
+                onChange={setContentBlocks}
+                onImageUpload={uploadImage}
+              />
             </div>
 
             <div className="flex gap-2">
