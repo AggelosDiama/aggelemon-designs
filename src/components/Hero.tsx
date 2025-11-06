@@ -1,4 +1,4 @@
-import profilePhoto from "@/assets/profile-original.jpg";
+import profilePhoto from "@/assets/portfolio-pic.png";
 import { ChevronDown, Mail, Linkedin } from "lucide-react";
 
 export const Hero = () => {

@@ -56,11 +56,7 @@ const Admin = () => {
   const [projectLink, setProjectLink] = useState("");
   const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>([]);
 
-  const MAX_SHORT_DESC_WORDS = 30;
-
-  const getWordCount = (text: string) => {
-    return text.trim().split(/\s+/).filter(Boolean).length;
-  };
+  const MAX_SHORT_DESC_CHARS = 200;
 
   useEffect(() => {
     checkUser();
@@ -133,13 +129,12 @@ const Admin = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validate short description word count
-    const wordCount = getWordCount(shortDescription);
-    if (wordCount > MAX_SHORT_DESC_WORDS) {
+    // Validate short description character count
+    if (shortDescription.length > MAX_SHORT_DESC_CHARS) {
       toast({
         variant: "destructive",
         title: "Short description too long",
-        description: `Please keep it to ${MAX_SHORT_DESC_WORDS} words or less. Current: ${wordCount} words.`,
+        description: `Please keep it to ${MAX_SHORT_DESC_CHARS} characters or less. Current: ${shortDescription.length} characters.`,
       });
       return;
     }
@@ -429,29 +424,18 @@ const Admin = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="shortDescription">Short Description * (max {MAX_SHORT_DESC_WORDS} words)</Label>
+              <Label htmlFor="shortDescription">Short Description * (max {MAX_SHORT_DESC_CHARS} characters)</Label>
               <Textarea
                 id="shortDescription"
                 value={shortDescription}
                 onChange={(e) => setShortDescription(e.target.value)}
                 required
                 rows={3}
+                placeholder="A brief 2-3 sentence description of the project"
               />
-              <p className={`text-sm ${getWordCount(shortDescription) > MAX_SHORT_DESC_WORDS ? 'text-destructive' : 'text-muted-foreground'}`}>
-                {getWordCount(shortDescription)} / {MAX_SHORT_DESC_WORDS} words
+              <p className={`text-sm ${shortDescription.length > MAX_SHORT_DESC_CHARS ? 'text-destructive' : 'text-muted-foreground'}`}>
+                {shortDescription.length} / {MAX_SHORT_DESC_CHARS} characters
               </p>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="fullContent">Full Content (Markdown) *</Label>
-              <Textarea
-                id="fullContent"
-                value={fullContent}
-                onChange={(e) => setFullContent(e.target.value)}
-                required
-                rows={10}
-                placeholder="Use markdown formatting: ## Headings, **bold**, *italic*, etc."
-              />
             </div>
 
             <div className="space-y-2">

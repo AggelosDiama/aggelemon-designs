@@ -7,6 +7,7 @@ import { ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { ProjectHero } from "@/components/project/ProjectHero";
 import { ContentBlockRenderer } from "@/components/project/ContentBlockRenderer";
+import { RecentProjects } from "@/components/project/RecentProjects";
 
 interface Project {
   id: string;
@@ -112,7 +113,7 @@ const ProjectDetail = () => {
           year={project.year}
         />
 
-        <div className="max-w-4xl mx-auto px-4 mb-12">
+        <div id="project-content" className="max-w-4xl mx-auto px-4 mb-12 pt-12">
           <Link
             to="/"
             className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
@@ -150,6 +151,8 @@ const ProjectDetail = () => {
           </div>
         )}
       </section>
+
+      <RecentProjects currentProjectId={project.id} />
       
       <Footer />
     </main>
