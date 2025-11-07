@@ -34,7 +34,7 @@ export const Header = () => {
                 to={link.path}
                 className={({ isActive }) =>
                   cn(
-                    "text-sm font-medium transition-all duration-200 relative",
+                    "text-base font-medium transition-all duration-200 relative",
                     "hover:text-lemon",
                     "after:content-[''] after:absolute after:w-full after:h-0.5 after:bottom-0 after:left-0",
                     "after:bg-lemon after:origin-bottom-right after:transition-transform after:duration-300",
