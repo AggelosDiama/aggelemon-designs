@@ -30,8 +30,8 @@ export const ProjectHero = ({
   };
 
   return (
-    <div className="w-full bg-lemon relative">
-      <div className="max-w-7xl mx-auto px-4 py-16 md:py-24">
+    <div className="w-full bg-lemon relative min-h-screen flex flex-col">
+      <div className="max-w-7xl mx-auto px-4 py-16 md:py-24 flex-1 flex items-center">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Left side - Project Info */}
           <div className="space-y-6">

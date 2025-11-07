@@ -114,42 +114,32 @@ const ProjectDetail = () => {
         />
 
         <div id="project-content" className="max-w-4xl mx-auto px-4 mb-12 pt-12">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
-          >
-            <ArrowLeft className="w-5 h-5" />
-            Back to Home
-          </Link>
-        </div>
-
-        {contentBlocks.length > 0 ? (
-          <ContentBlockRenderer blocks={contentBlocks} />
-        ) : (
-          project.full_content && (
-            <div className="max-w-4xl mx-auto px-4">
+          {contentBlocks.length > 0 ? (
+            <ContentBlockRenderer blocks={contentBlocks} />
+          ) : (
+            project.full_content && (
               <div className="prose prose-lg max-w-none">
                 <p className="text-foreground leading-relaxed">{project.full_content}</p>
               </div>
-            </div>
-          )
-        )}
+            )
+          )}
 
-        {project.tags && project.tags.length > 0 && (
-          <div className="max-w-4xl mx-auto px-4 mt-12">
-            <h2 className="text-2xl font-bold text-heading mb-4">Tools, Technologies & Methodologies</h2>
-            <div className="flex flex-wrap gap-3">
-              {project.tags.map((tool) => (
-                <span
-                  key={tool}
-                  className="px-4 py-2 rounded-lg bg-primary/10 text-foreground border border-primary/20"
-                >
-                  {tool}
-                </span>
-              ))}
+          {project.tags && project.tags.length > 0 && (
+            <div className="mt-12">
+              <h2 className="text-2xl font-bold text-heading mb-4">Tools, Technologies & Methodologies</h2>
+              <div className="flex flex-wrap gap-3">
+                {project.tags.map((tool) => (
+                  <span
+                    key={tool}
+                    className="px-4 py-2 rounded-lg bg-primary/10 text-foreground border border-primary/20"
+                  >
+                    {tool}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </section>
 
       <RecentProjects currentProjectId={project.id} />
