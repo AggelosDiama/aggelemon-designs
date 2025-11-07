@@ -1,5 +1,5 @@
-import { CheckCircle2, Mail } from "lucide-react";
-import { Linkedin } from "lucide-react";
+import { CheckCircle2, Mail, Linkedin } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 import cvQRCode from "@/assets/cv-qr-code.png";
 
 const skills = [
@@ -33,12 +33,26 @@ export const AboutPageContent = () => {
           <span className="highlight-heading">About Me</span>
         </h2>
 
-        <div className="max-w-5xl mx-auto space-y-16">
-          {/* Opening Snapshot & QR Code */}
+        <div className="max-w-5xl mx-auto space-y-12">
+          {/* Opening Snapshot */}
+          <div>
+            <p className="text-lg text-foreground leading-relaxed">
+              <span className="text-2xl mr-2">👋</span>
+              <span className="text-2xl font-bold text-heading">Hello!</span>
+            </p>
+            <p className="text-lg text-foreground leading-relaxed mt-4">
+              I see design as a way to <span className="highlight-text font-semibold text-heading">solve real problems</span>, not just to create and impress. My style <span className="highlight-text font-semibold text-heading">leans toward minimalism</span>, but every project starts with <span className="highlight-text font-semibold text-heading">questions, research, and curiosity</span>. I treat each challenge as a chance to <span className="highlight-text font-semibold text-heading">think differently</span>, even when it means stepping outside my comfort zone.
+            </p>
+          </div>
+
+          <Separator className="my-12" />
+
+          {/* Professional Story with QR Code */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
             <div className="lg:col-span-2">
-              <p className="text-lg text-foreground leading-relaxed">
-                I see design as a way to solve real problems, not just to create and impress. My style leans toward minimalism, but every project starts with questions, research, and curiosity. I treat each challenge as a chance to think differently, even when it means stepping outside my comfort zone.
+              <h3 className="text-2xl font-bold text-heading mb-4">Professional Story</h3>
+              <p className="text-foreground leading-relaxed">
+                I was always the <span className="highlight-text font-semibold text-heading">"tech guy"</span> in my circles, so studying computer engineering felt like the obvious path. During university, I joined <span className="highlight-text font-semibold text-heading">EESTEC</span>, a European organization for Electrical and Computer Engineers, and discovered their Graphic Design team. That's where <span className="highlight-text font-semibold text-heading">design first clicked</span> for me. I moved from small visual tasks to <span className="highlight-text font-semibold text-heading">leading the team</span>, designing the annual magazine, and mentoring new designers. Freelance projects followed, giving me space to explore creativity through real challenges. To connect my technical background with that creative drive, I began focusing on <span className="highlight-text font-semibold text-heading">UI/UX design</span>, taking on projects and specialized courses to refine my skills.
               </p>
             </div>
             <div className="flex flex-col items-center justify-center p-6 rounded-lg bg-card border border-border">
@@ -47,21 +61,17 @@ export const AboutPageContent = () => {
             </div>
           </div>
 
-          {/* Professional Story */}
-          <div>
-            <h3 className="text-2xl font-bold text-heading mb-4">Professional Story</h3>
-            <p className="text-foreground leading-relaxed">
-              I was always the "tech guy" in my circles, so studying computer engineering felt like the obvious path. During university, I joined EESTEC, a European organization for Electrical and Computer Engineers, and discovered their Graphic Design team. That's where design first clicked for me. I moved from small visual tasks to leading the team, designing the annual magazine, and mentoring new designers. Freelance projects followed, giving me space to explore creativity through real challenges. To connect my technical background with that creative drive, I began focusing on UI/UX design, taking on projects and specialized courses to refine my skills.
-            </p>
-          </div>
+          <Separator className="my-12" />
 
           {/* Design Philosophy */}
           <div>
             <h3 className="text-2xl font-bold text-heading mb-4">Design Philosophy</h3>
             <p className="text-foreground leading-relaxed">
-              I design with the user's experience front and center. Every decision aims to make information clear and tasks easy to complete. I'm proactive with new challenges, asking questions and seeking input to find the best solutions. Negative space is core to my approach; I believe simplicity helps users focus, making each design both functional and easy on the eyes.
+              I design with the <span className="highlight-text font-semibold text-heading">user's experience front and center</span>. Every decision aims to make <span className="highlight-text font-semibold text-heading">information clear</span> and <span className="highlight-text font-semibold text-heading">tasks easy to complete</span>. I'm proactive with new challenges, asking questions and seeking input to find the best solutions. <span className="highlight-text font-semibold text-heading">Negative space</span> is core to my approach; I believe <span className="highlight-text font-semibold text-heading">simplicity helps users focus</span>, making each design both functional and easy on the eyes.
             </p>
           </div>
+
+          <Separator className="my-12" />
 
           {/* Skills & Lemon Facts Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -96,6 +106,8 @@ export const AboutPageContent = () => {
               </div>
             </div>
           </div>
+
+          <Separator className="my-12" />
 
           {/* Call to Action */}
           <div className="text-center space-y-6 pt-8">
