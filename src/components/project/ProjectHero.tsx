@@ -30,11 +30,11 @@ export const ProjectHero = ({
   };
 
   return (
-    <div className="w-full bg-lemon relative min-h-screen flex flex-col">
-      <div className="max-w-7xl mx-auto px-4 py-16 md:py-24 flex-1 flex items-center">
+    <div className="w-full bg-lemon relative min-h-[85vh] flex flex-col">
+      <div className="max-w-7xl mx-auto px-4 py-12 md:py-16 flex-1 flex items-center">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Left side - Project Info */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             <div className="flex items-center gap-3 text-sm">
               <span className="px-3 py-1 rounded-full bg-black/10 text-black font-medium">
                 {category}
@@ -88,7 +88,7 @@ export const ProjectHero = ({
       </div>
 
       {/* Scroll Arrow */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
         <button
           onClick={scrollToContent}
           className="flex flex-col items-center gap-2 text-black hover:text-black/70 transition-colors cursor-pointer"
