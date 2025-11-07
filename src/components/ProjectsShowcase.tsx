@@ -45,7 +45,7 @@ export const ProjectsShowcase = () => {
     <section className="py-20 px-4 animate-fade-in bg-muted/30">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-heading text-center mb-12">
-          Featured Projects
+          <span className="highlight-heading">Featured Projects</span>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project, index) => (

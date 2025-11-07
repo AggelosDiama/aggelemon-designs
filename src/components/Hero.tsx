@@ -21,16 +21,16 @@ export const Hero = () => {
             {/* Hero Text */}
             <div className="flex-1 text-center md:text-left space-y-4">
               <h1 className="text-4xl md:text-6xl font-bold text-heading">
-                I'm Aggelos, you can call me <span className="highlight">Lemon</span>
+                I'm Aggelos, you can call me <span className="highlight highlight-heading">Lemon</span>
               </h1>
               <h2 className="text-2xl md:text-3xl font-semibold text-heading">
-                Graphic & UI/UX Designer
+                <span className="highlight-heading">Graphic & UI/UX Designer</span>
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
                 Combining my computer engineering roots with a flair for visual storytelling, I
                 create user-centered digital experiences, from bold graphics to seamless UI/UX.
                 Driven by curiosity, inspired by community, and always ready to{" "}
-                <span className="highlight">squeeze the most out of design</span>. I'm constantly 
+                <span className="highlight-text font-semibold text-heading">squeeze the most out of design</span>. I'm constantly 
                 exploring how AI can elevate creativity and make my daily routine and projects 
                 smarter and more efficient.
               </p>
@@ -40,14 +40,14 @@ export const Hero = () => {
                   href="https://www.linkedin.com/in/aggelos-diamantopoulos/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-bold text-heading hover:text-lemon transition-colors"
+                  className="highlight-link font-bold text-heading"
                 >
                   LinkedIn
                 </a>
                 {" "}or email me at{" "}
                 <a 
                   href="mailto:aggelosdiama@gmail.com"
-                  className="font-bold text-heading hover:text-lemon transition-colors"
+                  className="highlight-link font-bold text-heading"
                 >
                   aggelosdiama@gmail.com
                 </a>
