@@ -21,7 +21,7 @@ export const Hero = () => {
             {/* Hero Text */}
             <div className="flex-1 text-center md:text-left space-y-4">
               <h1 className="text-4xl md:text-6xl font-bold text-heading">
-                I'm Aggelos, you can call me <span className="highlight highlight-heading">Lemon</span>
+                I'm Aggelos, you can call me <span className="highlight-heading">Lemon</span>
               </h1>
               <h2 className="text-2xl md:text-3xl font-semibold text-heading">
                 <span className="highlight-heading">Graphic & UI/UX Designer</span>
