@@ -34,7 +34,7 @@ export const AboutSection = () => {
             {/* Top Left: Opening Snapshot */}
             <div>
               <p className="text-lg text-foreground leading-relaxed">
-                I see design as a way to solve real problems, not just to create and impress. My style leans toward minimalism, but every project starts with questions, research, and curiosity. I treat each challenge as a chance to think differently, even when it means stepping outside my comfort zone.
+                I see design as a way to solve real problems, not just to create and impress. My style <span className="highlight-text font-semibold text-heading">leans toward minimalism</span>, but every project starts with <span className="highlight-text font-semibold text-heading">questions, research, and curiosity</span>. I treat each challenge as a chance to think differently, even when it means stepping outside my comfort zone.
               </p>
             </div>
 
