@@ -107,9 +107,8 @@ All colors MUST be HSL.
 
   /* Marker-style highlight for headings */
   .highlight-heading {
-    background: linear-gradient(180deg, transparent 60%, hsl(48 100% 51% / 0.4) 60%);
-    background-size: 100% 100%;
-    padding: 0 0.2em;
+    background: hsl(48 100% 51%);
+    padding: 0.1em 0.3em;
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
     display: inline;
@@ -118,9 +117,8 @@ All colors MUST be HSL.
 
   /* Marker-style highlight for bold text */
   .highlight-text {
-    background: linear-gradient(180deg, transparent 60%, hsl(48 100% 51% / 0.4) 60%);
-    background-size: 100% 100%;
-    padding: 0 0.15em;
+    background: hsl(48 100% 51%);
+    padding: 0.1em 0.3em;
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
   }
@@ -139,7 +137,7 @@ All colors MUST be HSL.
     left: 0;
     width: 100%;
     height: 40%;
-    background: hsl(48 100% 51% / 0.4);
+    background: hsl(48 100% 51%);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
