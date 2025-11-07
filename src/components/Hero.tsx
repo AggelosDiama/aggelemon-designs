@@ -26,7 +26,7 @@ export const Hero = () => {
               <h2 className="text-2xl md:text-3xl font-semibold text-heading">
                 Graphic & UI/UX Designer
               </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
                 Combining my computer engineering roots with a flair for visual storytelling, I
                 create user-centered digital experiences, from bold graphics to seamless UI/UX.
                 Driven by curiosity, inspired by community, and always ready to{" "}
@@ -34,7 +34,7 @@ export const Hero = () => {
                 exploring how AI can elevate creativity and make my daily routine and projects 
                 smarter and more efficient.
               </p>
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl pt-2">
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl pt-2">
                 Get in touch with me by connecting on{" "}
                 <a 
                   href="https://www.linkedin.com/in/aggelos-diamantopoulos/"
