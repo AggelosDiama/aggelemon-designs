@@ -1,20 +1,23 @@
 import { CheckCircle2 } from "lucide-react";
+import cvQRCode from "@/assets/cv-qr-code.png";
 
 const skills = [
-  "UI/UX Design & Prototyping",
+  "UI/UX Design",
+  "Prototyping",
   "Visual Design & Branding",
-  "User Research & Testing",
+  "User Research",
+  "Journey Mapping",
+  "Usability Testing",
   "Design Systems",
-  "Figma, Adobe Creative Suite",
-  "Frontend Basics (HTML/CSS)",
-  "Cross-functional Collaboration",
-  "Accessibility & Inclusive Design",
+  "Responsive Design",
 ];
 
 const lemonFacts = [
-  "Started with computer engineering before falling in love with design",
-  "Believes the best designs are invisible—they just work",
-  "Always learning, always experimenting, never settling",
+  "I play Pokémon on my Switch; my childhood love for the series is still strong.",
+  "Improv theater is a weekly habit that helps me relax, reset, and stay creative.",
+  "I listen to rock and metal and always hit shuffle instead of making playlists.",
+  "I am a big Marvel fan and never miss a new movie.",
+  "When I start making puns, it means I'm comfortable with you.",
 ];
 
 export const AboutSection = () => {
@@ -25,19 +28,23 @@ export const AboutSection = () => {
           <span className="highlight-heading">About Me</span>
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-          {/* Background & Skills */}
-          <div className="space-y-8">
+        <div className="max-w-5xl mx-auto">
+          {/* 2x2 Grid Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            {/* Top Left: Opening Snapshot */}
             <div>
-              <h3 className="text-2xl font-bold text-heading mb-4">Background & Education</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                With a foundation in <span className="highlight-text font-semibold text-heading">computer engineering</span>, 
-                I discovered my passion for creating <span className="highlight-text font-semibold text-heading">intuitive, beautiful digital experiences</span>. 
-                I've combined technical understanding with creative vision to bridge the gap 
-                between users and technology.
+              <p className="text-lg text-foreground leading-relaxed">
+                I see design as a way to solve real problems, not just to create and impress. My style leans toward minimalism, but every project starts with questions, research, and curiosity. I treat each challenge as a chance to think differently, even when it means stepping outside my comfort zone.
               </p>
             </div>
 
+            {/* Top Right: QR Code */}
+            <div className="flex flex-col items-center justify-center p-6 rounded-lg bg-card border border-border">
+              <img src={cvQRCode} alt="CV QR Code" className="w-48 h-48 mb-3" />
+              <p className="text-sm text-muted-foreground text-center">Scan QR for my CV</p>
+            </div>
+
+            {/* Bottom Left: Skills */}
             <div>
               <h3 className="text-2xl font-bold text-heading mb-4">Skills</h3>
               <div className="grid grid-cols-1 gap-3">
@@ -49,23 +56,23 @@ export const AboutSection = () => {
                 ))}
               </div>
             </div>
-          </div>
 
-          {/* Lemon Facts */}
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-heading mb-4">
-              🍋 <span className="highlight-heading">Lemon</span> Facts
-            </h3>
-            <div className="space-y-4">
-              {lemonFacts.map((fact, index) => (
-                <div
-                  key={index}
-                  className="flex items-start gap-3 p-4 rounded-lg bg-card border border-border"
-                >
-                  <span className="text-2xl">🍋</span>
-                  <p className="text-foreground leading-relaxed">{fact}</p>
-                </div>
-              ))}
+            {/* Bottom Right: Lemon Facts */}
+            <div>
+              <h3 className="text-2xl font-bold text-heading mb-4">
+                🍋 <span className="highlight-heading">Lemon</span> Facts
+              </h3>
+              <div className="space-y-4">
+                {lemonFacts.map((fact, index) => (
+                  <div
+                    key={index}
+                    className="flex items-start gap-3 p-4 rounded-lg bg-card border border-border"
+                  >
+                    <span className="text-2xl">🍋</span>
+                    <p className="text-foreground leading-relaxed">{fact}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

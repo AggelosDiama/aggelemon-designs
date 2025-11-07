@@ -1,12 +1,12 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { AboutSection } from "@/components/AboutSection";
+import { AboutPageContent } from "@/components/AboutPageContent";
 
 const About = () => {
   return (
     <main className="min-h-screen">
       <Header />
-      <AboutSection />
+      <AboutPageContent />
       <Footer />
     </main>
   );
