@@ -7,7 +7,7 @@ const navLinks = [
   { name: "UI/UX Projects", path: "/uiux-projects" },
   { name: "Graphic Design", path: "/graphic-design" },
   { name: "AI & Tools", path: "/ai-tools" },
-  { name: "About", path: "/about" },
+  { name: "About Me", path: "/about" },
   { name: "Contact", path: "#contact" },
 ];
 
