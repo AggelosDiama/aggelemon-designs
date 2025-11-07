@@ -1,4 +1,4 @@
-import { CheckCircle2, Mail, Linkedin } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import cvQRCode from "@/assets/cv-qr-code.png";
 
@@ -113,32 +113,22 @@ export const AboutPageContent = () => {
 
           {/* Call to Action */}
           <div className="text-center space-y-6 pt-8">
-            <h3 className="text-2xl font-bold text-heading">Let's Connect</h3>
+            <h3 className="text-2xl font-bold text-heading">Get in touch!</h3>
             <p className="text-foreground leading-relaxed max-w-3xl mx-auto">
               I am open to new opportunities, collaborations, and meeting fellow designers. You can email me at{" "}
-              <a href="mailto:aggelosdiama@gmail.com" className="text-lemon hover:underline">
+              <a href="mailto:aggelosdiama@gmail.com" className="font-bold text-heading hover:text-lemon transition-colors duration-300 underline-offset-4 hover:underline">
                 aggelosdiama@gmail.com
               </a>{" "}
-              or connect with me on LinkedIn. I am always happy to chat.
-            </p>
-            <div className="flex justify-center gap-6 pt-4">
-              <a
-                href="https://www.linkedin.com/in/aggelos-diamantopoulos/"
+              or connect with me on{" "}
+              <a 
+                href="https://www.linkedin.com/in/aggelos-diamantopoulos/" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-4 rounded-lg bg-card hover:bg-muted transition-all duration-300 group"
-                aria-label="LinkedIn Profile"
+                className="font-bold text-heading hover:text-lemon transition-colors duration-300 underline-offset-4 hover:underline"
               >
-                <Linkedin className="w-8 h-8 text-heading group-hover:text-lemon transition-colors" />
-              </a>
-              <a
-                href="mailto:aggelosdiama@gmail.com"
-                className="p-4 rounded-lg bg-card hover:bg-muted transition-all duration-300 group"
-                aria-label="Email Contact"
-              >
-                <Mail className="w-8 h-8 text-heading group-hover:text-lemon transition-colors" />
-              </a>
-            </div>
+                LinkedIn
+              </a>. I am always happy to chat.
+            </p>
           </div>
         </div>
       </div>
