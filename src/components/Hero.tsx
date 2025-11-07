@@ -6,7 +6,7 @@ export const Hero = () => {
     <section className="min-h-screen flex flex-col items-center justify-center px-4 py-20 animate-fade-in relative">
       <div className="max-w-7xl w-full flex-1 flex items-center">
         <div className="max-w-6xl mx-auto w-full">
-          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+          <div className="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-12">
             {/* Profile Image */}
             <div className="flex-shrink-0">
               <div className="w-80 h-80 md:w-96 md:h-96 lg:w-[450px] lg:h-[450px]">
