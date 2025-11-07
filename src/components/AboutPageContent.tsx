@@ -22,9 +22,7 @@ const skills = [
 const lemonFacts = [
   "I play Pokémon on my Switch; my childhood love for the series is still strong.",
   "Improv theater is a weekly habit that helps me relax, reset, and stay creative.",
-  "I listen to rock and metal and always hit shuffle instead of making playlists.",
   "I am a big Marvel fan and never miss a new movie.",
-  "When I start making puns, it means I'm comfortable with you.",
 ];
 
 export const AboutPageContent = () => {
