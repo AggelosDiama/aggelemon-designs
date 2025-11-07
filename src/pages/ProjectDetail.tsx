@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { ProjectHero } from "@/components/project/ProjectHero";
 import { ContentBlockRenderer } from "@/components/project/ContentBlockRenderer";
 import { RecentProjects } from "@/components/project/RecentProjects";
+import ReactMarkdown from "react-markdown";
 
 interface Project {
   id: string;
@@ -119,7 +120,55 @@ const ProjectDetail = () => {
           ) : (
             project.full_content && (
               <div className="prose prose-lg max-w-none">
-                <p className="text-foreground leading-relaxed">{project.full_content}</p>
+                <ReactMarkdown
+                  components={{
+                    h1: ({ children }) => (
+                      <h1 className="text-3xl font-bold text-heading mb-4">
+                        {children}
+                      </h1>
+                    ),
+                    h2: ({ children }) => (
+                      <h2 className="text-2xl font-bold text-heading mb-3">
+                        {children}
+                      </h2>
+                    ),
+                    h3: ({ children }) => (
+                      <h3 className="text-xl font-semibold text-heading mb-2">
+                        {children}
+                      </h3>
+                    ),
+                    p: ({ children }) => (
+                      <p className="text-foreground leading-relaxed mb-4">
+                        {children}
+                      </p>
+                    ),
+                    ul: ({ children }) => (
+                      <ul className="list-disc list-inside text-foreground space-y-2 mb-4">
+                        {children}
+                      </ul>
+                    ),
+                    ol: ({ children }) => (
+                      <ol className="list-decimal list-inside text-foreground space-y-2 mb-4">
+                        {children}
+                      </ol>
+                    ),
+                    strong: ({ children }) => (
+                      <strong className="font-semibold text-heading">
+                        {children}
+                      </strong>
+                    ),
+                    em: ({ children }) => (
+                      <em className="italic">{children}</em>
+                    ),
+                    blockquote: ({ children }) => (
+                      <blockquote className="border-l-4 border-primary pl-4 italic text-muted-foreground my-4">
+                        {children}
+                      </blockquote>
+                    ),
+                  }}
+                >
+                  {project.full_content}
+                </ReactMarkdown>
               </div>
             )
           )}
