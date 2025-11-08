@@ -131,8 +131,8 @@ All colors MUST be HSL.
     background: linear-gradient(
       178deg,
       transparent 48%,
-      hsl(48 100% 51% / 0.4) 50%,
-      hsl(48 100% 51% / 0.4) 85%,
+      hsl(58 100% 51% / 0.6) 50%,
+      hsl(58 100% 51% / 0.6) 85%,
       transparent 87%
     );
     background-size: 100% 100%;
@@ -155,7 +155,7 @@ All colors MUST be HSL.
     left: 0;
     width: 100%;
     height: 40%;
-    background: hsl(48 100% 51% / 0.4);
+    background: hsl(58 100% 51% / 0.6);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
