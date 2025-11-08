@@ -114,8 +114,8 @@ All colors MUST be HSL.
     background: linear-gradient(
       178deg,
       transparent 48%,
-      hsl(58 100% 51% / 0.4) 50%,
-      hsl(58 100% 51% / 0.4) 85%,
+      hsl(58 100% 51% / 0.6) 50%,
+      hsl(58 100% 51% / 0.6) 85%,
       transparent 87%
     );
     background-size: 100% 100%;
