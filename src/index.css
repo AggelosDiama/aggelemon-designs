@@ -16,7 +16,7 @@ All colors MUST be HSL.
     --heading: 0 0% 20%;
 
     /* Lemon yellow - for highlights only */
-    --lemon: 58 100% 51%;
+    --lemon: 48 100% 51%;
 
     /* Card colors */
     --card: 0 0% 98%;
@@ -56,7 +56,7 @@ All colors MUST be HSL.
     --foreground: 0 0% 95%;
 
     --heading: 0 0% 95%;
-    --lemon: 68 100% 51%;
+    --lemon: 48 100% 51%;
 
     --card: 0 0% 15%;
     --card-foreground: 0 0% 95%;
