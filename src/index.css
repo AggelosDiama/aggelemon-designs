@@ -14,9 +14,9 @@ All colors MUST be HSL.
 
     /* Dark heading color #333333 */
     --heading: 0 0% 20%;
-    
+
     /* Lemon yellow - for highlights only */
-    --lemon: 48 100% 51%;
+    --lemon: 58 100% 51%;
 
     /* Card colors */
     --card: 0 0% 98%;
@@ -111,7 +111,13 @@ All colors MUST be HSL.
 
   /* Marker-style highlight for headings */
   .highlight-heading {
-    background: linear-gradient(178deg, transparent 48%, hsl(48 100% 51% / 0.4) 50%, hsl(48 100% 51% / 0.4) 85%, transparent 87%);
+    background: linear-gradient(
+      178deg,
+      transparent 48%,
+      hsl(48 100% 51% / 0.4) 50%,
+      hsl(48 100% 51% / 0.4) 85%,
+      transparent 87%
+    );
     background-size: 100% 100%;
     padding: 0 0.2em;
     box-decoration-break: clone;
@@ -122,7 +128,13 @@ All colors MUST be HSL.
 
   /* Marker-style highlight for bold text */
   .highlight-text {
-    background: linear-gradient(178deg, transparent 48%, hsl(48 100% 51% / 0.4) 50%, hsl(48 100% 51% / 0.4) 85%, transparent 87%);
+    background: linear-gradient(
+      178deg,
+      transparent 48%,
+      hsl(48 100% 51% / 0.4) 50%,
+      hsl(48 100% 51% / 0.4) 85%,
+      transparent 87%
+    );
     background-size: 100% 100%;
     padding: 0 0.15em;
     box-decoration-break: clone;
@@ -137,7 +149,7 @@ All colors MUST be HSL.
   }
 
   .highlight-link::before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
