@@ -16,7 +16,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ContentBlockEditor, ContentBlock } from "@/components/admin/ContentBlockEditor";
+import {
+  ContentBlockEditor,
+  ContentBlock,
+} from "@/components/admin/ContentBlockEditor";
 
 interface Project {
   id: string;
@@ -56,7 +59,7 @@ const Admin = () => {
   const [projectLink, setProjectLink] = useState("");
   const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>([]);
 
-  const MAX_SHORT_DESC_CHARS = 200;
+  const MAX_SHORT_DESC_CHARS = 300;
 
   useEffect(() => {
     checkUser();
@@ -64,7 +67,9 @@ const Admin = () => {
   }, []);
 
   const checkUser = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     if (!user) {
       navigate("/login");
       return;
@@ -109,7 +114,9 @@ const Admin = () => {
 
   const uploadImage = async (file: File): Promise<string> => {
     const fileExt = file.name.split(".").pop();
-    const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`;
+    const fileName = `${Math.random()
+      .toString(36)
+      .substring(2)}-${Date.now()}.${fileExt}`;
 
     const { error: uploadError } = await supabase.storage
       .from("project-images")
@@ -119,9 +126,9 @@ const Admin = () => {
       throw new Error(uploadError.message);
     }
 
-    const { data: { publicUrl } } = supabase.storage
-      .from("project-images")
-      .getPublicUrl(fileName);
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from("project-images").getPublicUrl(fileName);
 
     return publicUrl;
   };
@@ -144,7 +151,9 @@ const Admin = () => {
     // Upload image file if provided
     if (imageFile) {
       const fileExt = imageFile.name.split(".").pop();
-      const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`;
+      const fileName = `${Math.random()
+        .toString(36)
+        .substring(2)}-${Date.now()}.${fileExt}`;
       const filePath = fileName;
 
       const { error: uploadError, data } = await supabase.storage
@@ -161,9 +170,9 @@ const Admin = () => {
       }
 
       // Get public URL
-      const { data: { publicUrl } } = supabase.storage
-        .from("project-images")
-        .getPublicUrl(filePath);
+      const {
+        data: { publicUrl },
+      } = supabase.storage.from("project-images").getPublicUrl(filePath);
 
       finalImageUrl = publicUrl;
     }
@@ -177,7 +186,10 @@ const Admin = () => {
       category,
       featured,
       image_url: finalImageUrl,
-      tags: tags.split(",").map((t) => t.trim()).filter(Boolean),
+      tags: tags
+        .split(",")
+        .map((t) => t.trim())
+        .filter(Boolean),
       slug: slug || title.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
       project_link: projectLink || null,
     };
@@ -309,7 +321,11 @@ const Admin = () => {
   };
 
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
   }
 
   return (
@@ -325,7 +341,10 @@ const Admin = () => {
           </div>
 
           {/* Project Form */}
-          <form onSubmit={handleSubmit} className="bg-card p-6 rounded-lg shadow-sm mb-12 space-y-6">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-card p-6 rounded-lg shadow-sm mb-12 space-y-6"
+          >
             <h2 className="text-2xl font-bold text-heading mb-4">
               {editingProject ? "Edit Project" : "Add New Project"}
             </h2>
@@ -353,14 +372,19 @@ const Admin = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="month">Month *</Label>
-                <Select value={month.toString()} onValueChange={(v) => setMonth(parseInt(v))}>
+                <Select
+                  value={month.toString()}
+                  onValueChange={(v) => setMonth(parseInt(v))}
+                >
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
                       <SelectItem key={m} value={m.toString()}>
-                        {new Date(2000, m - 1).toLocaleString("default", { month: "long" })}
+                        {new Date(2000, m - 1).toLocaleString("default", {
+                          month: "long",
+                        })}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -386,7 +410,9 @@ const Admin = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="UI/UX Design">UI/UX Design</SelectItem>
-                    <SelectItem value="Graphic Design">Graphic Design</SelectItem>
+                    <SelectItem value="Graphic Design">
+                      Graphic Design
+                    </SelectItem>
                     <SelectItem value="AI Tools">AI Tools</SelectItem>
                   </SelectContent>
                 </Select>
@@ -409,7 +435,9 @@ const Admin = () => {
                 {(imageUrl || imageFile) && (
                   <div className="mt-2">
                     <p className="text-sm text-muted-foreground mb-2">
-                      {imageFile ? `Selected: ${imageFile.name}` : "Current image URL set"}
+                      {imageFile
+                        ? `Selected: ${imageFile.name}`
+                        : "Current image URL set"}
                     </p>
                     {imageUrl && !imageFile && (
                       <img
@@ -424,7 +452,9 @@ const Admin = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="shortDescription">Short Description * (max {MAX_SHORT_DESC_CHARS} characters)</Label>
+              <Label htmlFor="shortDescription">
+                Short Description * (max {MAX_SHORT_DESC_CHARS} characters)
+              </Label>
               <Textarea
                 id="shortDescription"
                 value={shortDescription}
@@ -433,13 +463,21 @@ const Admin = () => {
                 rows={3}
                 placeholder="A brief 2-3 sentence description of the project"
               />
-              <p className={`text-sm ${shortDescription.length > MAX_SHORT_DESC_CHARS ? 'text-destructive' : 'text-muted-foreground'}`}>
+              <p
+                className={`text-sm ${
+                  shortDescription.length > MAX_SHORT_DESC_CHARS
+                    ? "text-destructive"
+                    : "text-muted-foreground"
+                }`}
+              >
                 {shortDescription.length} / {MAX_SHORT_DESC_CHARS} characters
               </p>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="tags">Tools, Technologies & Methodologies (comma-separated) *</Label>
+              <Label htmlFor="tags">
+                Tools, Technologies & Methodologies (comma-separated) *
+              </Label>
               <Input
                 id="tags"
                 value={tags}
@@ -459,7 +497,8 @@ const Admin = () => {
                 placeholder="https://example.com"
               />
               <p className="text-xs text-muted-foreground">
-                If provided, a "Check it here" button will appear on the project page
+                If provided, a "Check it here" button will appear on the project
+                page
               </p>
             </div>
 
@@ -512,12 +551,20 @@ const Admin = () => {
                     )}
                   </h3>
                   <p className="text-sm text-muted-foreground mb-2">
-                    {project.category} • {new Date(project.year, project.month - 1).toLocaleString("default", { month: "long", year: "numeric" })}
+                    {project.category} •{" "}
+                    {new Date(project.year, project.month - 1).toLocaleString(
+                      "default",
+                      { month: "long", year: "numeric" }
+                    )}
                   </p>
                   <p className="text-foreground">{project.short_description}</p>
                 </div>
                 <div className="flex gap-2 ml-4">
-                  <Button variant="outline" size="sm" onClick={() => handleEdit(project)}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleEdit(project)}
+                  >
                     Edit
                   </Button>
                   <Button
