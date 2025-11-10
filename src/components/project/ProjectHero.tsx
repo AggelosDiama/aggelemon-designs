@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ExternalLink, ChevronDown } from "lucide-react";
+import { LazyImage } from "@/components/LazyImage";
 
 interface ProjectHeroProps {
   title: string;
@@ -77,10 +78,11 @@ export const ProjectHero = ({
           {/* Right side - Project Image */}
           <div className="order-first md:order-last">
             <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-4 border-black/10">
-              <img
+              <LazyImage
                 src={coverImage}
                 alt={title}
                 className="w-full h-full object-cover"
+                skeletonClassName="w-full h-full"
               />
             </div>
           </div>

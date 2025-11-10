@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { LazyImage } from "@/components/LazyImage";
 
 interface ProjectCardProps {
   title: string;
@@ -17,10 +18,11 @@ export const ProjectCard = ({ title, tags, slug, image, short_description, categ
       <div className="bg-card rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
         {/* Project Image */}
         <div className="aspect-video overflow-hidden bg-muted relative">
-          <img 
+          <LazyImage 
             src={image} 
             alt={title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            skeletonClassName="w-full h-full"
           />
           {showCategory && category && (
             <span className="absolute top-4 right-4 px-4 py-2 text-xs font-semibold rounded-full bg-primary text-primary-foreground">

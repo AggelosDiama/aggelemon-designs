@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { ProjectCard } from "./ProjectCard";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Project {
   title: string;
@@ -37,8 +38,25 @@ export const ProjectsShowcase = () => {
   if (loading) {
     return (
       <section className="py-20 px-4 animate-fade-in bg-muted/30">
-        <div className="max-w-6xl mx-auto text-center">
-          <p className="text-muted-foreground">Loading projects...</p>
+        <div className="max-w-6xl mx-auto">
+          <Skeleton className="h-12 w-80 mx-auto mb-12" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="bg-card rounded-lg overflow-hidden shadow-sm">
+                <Skeleton className="aspect-video w-full" />
+                <div className="p-6 space-y-4">
+                  <Skeleton className="h-8 w-3/4" />
+                  <div className="flex gap-2">
+                    <Skeleton className="h-6 w-20" />
+                    <Skeleton className="h-6 w-20" />
+                    <Skeleton className="h-6 w-20" />
+                  </div>
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-2/3" />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     );

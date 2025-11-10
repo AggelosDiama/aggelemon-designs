@@ -27,12 +27,7 @@ export const Hero = () => {
                 <span className="highlight-heading">Graphic & UI/UX Designer</span>
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
-                Combining my computer engineering roots with a flair for visual storytelling, I
-                create user-centered digital experiences, from bold graphics to seamless UI/UX.
-                Driven by curiosity, inspired by community, and always ready to{" "}
-                <span className="highlight-text font-semibold text-heading">squeeze the most out of design</span>. I'm constantly 
-                exploring how AI can elevate creativity and make my daily routine and projects 
-                smarter and more efficient.
+                I was always the tech guy, but I realized technology can be <span className="highlight-text font-semibold text-heading">deeply creative</span>. It's not just about code and algorithms, but it's about <span className="highlight-text font-semibold text-heading">people, ideas, and the problems we try to solve</span>. Whether it's a logo, a post, a website, or an app, I'm drawn to finding smarter, more efficient ways to make things work better. AI adds another layer to that curiosity, helping me explore <span className="highlight-text font-semibold text-heading">how a prompt can create and improve</span>. Right now, I'm learning through new experiences and projects, connecting with people who share the same drive to create and solve.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl pt-2">
                 Get in touch with me by connecting on{" "}
