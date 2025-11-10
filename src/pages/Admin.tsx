@@ -76,6 +76,9 @@ const Admin = () => {
   const [sortOrder, setSortOrder] = useState<"newest" | "oldest">(
     (localStorage.getItem("adminSortOrder") as "newest" | "oldest") || "newest"
   );
+  const [searchQuery, setSearchQuery] = useState<string>(
+    localStorage.getItem("adminSearchQuery") || ""
+  );
 
   const MAX_SHORT_DESC_CHARS = 300;
 
@@ -153,7 +156,7 @@ const Admin = () => {
     return publicUrl;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent, isDraft: boolean = false) => {
     e.preventDefault();
 
     // Validate short description character count
@@ -212,8 +215,8 @@ const Admin = () => {
         .filter(Boolean),
       slug: slug || title.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
       project_link: projectLink || null,
-      hidden,
-      draft,
+      hidden: editingProject ? hidden : false,
+      draft: editingProject ? draft : isDraft,
     };
 
     let projectId = editingProject?.id;
@@ -281,8 +284,12 @@ const Admin = () => {
     }
 
     toast({
-      title: editingProject ? "Project updated!" : "Project created!",
-      description: "The project has been successfully saved.",
+      title: editingProject ? "Project updated!" : (isDraft ? "Draft saved!" : "Project created!"),
+      description: editingProject 
+        ? "The project has been successfully updated." 
+        : (isDraft 
+          ? "Draft saved. Edit and click 'Add Project' to publish." 
+          : "The project has been successfully created."),
     });
     resetForm();
     fetchProjects();
@@ -386,9 +393,25 @@ const Admin = () => {
     localStorage.setItem("adminSortOrder", sortOrder);
   }, [sortOrder]);
 
+  useEffect(() => {
+    localStorage.setItem("adminSearchQuery", searchQuery);
+  }, [searchQuery]);
+
   // Filter and sort projects
   const filteredProjects = projects
     .filter((project) => {
+      // Search filter
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        const matchesTitle = project.title.toLowerCase().includes(query);
+        const matchesDescription = project.short_description?.toLowerCase().includes(query);
+        const matchesTags = project.tags?.some(tag => tag.toLowerCase().includes(query));
+        
+        if (!matchesTitle && !matchesDescription && !matchesTags) {
+          return false;
+        }
+      }
+
       // Category filter
       if (selectedCategory && project.category !== selectedCategory) return false;
 
@@ -601,28 +624,31 @@ const Admin = () => {
                   Featured Project (show on homepage)
                 </Label>
               </div>
+              {editingProject && (
+                <>
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="draft"
+                      checked={draft}
+                      onCheckedChange={(checked) => setDraft(checked as boolean)}
+                    />
+                    <Label htmlFor="draft" className="cursor-pointer">
+                      Draft (page generated but not public)
+                    </Label>
+                  </div>
 
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="draft"
-                  checked={draft}
-                  onCheckedChange={(checked) => setDraft(checked as boolean)}
-                />
-                <Label htmlFor="draft" className="cursor-pointer">
-                  Save as Draft (page generated but not public)
-                </Label>
-              </div>
-
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="hidden"
-                  checked={hidden}
-                  onCheckedChange={(checked) => setHidden(checked as boolean)}
-                />
-                <Label htmlFor="hidden" className="cursor-pointer">
-                  Hide Project (not visible on public portfolio)
-                </Label>
-              </div>
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="hidden"
+                      checked={hidden}
+                      onCheckedChange={(checked) => setHidden(checked as boolean)}
+                    />
+                    <Label htmlFor="hidden" className="cursor-pointer">
+                      Hide Project (not visible on public portfolio)
+                    </Label>
+                  </div>
+                </>
+              )}
             </div>
 
             <div className="border-t border-border pt-6">
@@ -637,6 +663,15 @@ const Admin = () => {
               <Button type="submit">
                 {editingProject ? "Update Project" : "Add Project"}
               </Button>
+              {!editingProject && (
+                <Button 
+                  type="button" 
+                  variant="outline" 
+                  onClick={(e) => handleSubmit(e as any, true)}
+                >
+                  Save as Draft
+                </Button>
+              )}
               {editingProject && (
                 <Button type="button" variant="outline" onClick={resetForm}>
                   Cancel Edit
@@ -652,6 +687,18 @@ const Admin = () => {
               
               {/* Filters */}
               <div className="bg-card p-4 rounded-lg shadow-sm space-y-4">
+                {/* Search */}
+                <div className="space-y-2">
+                  <Label className="text-sm font-medium">Search</Label>
+                  <Input
+                    type="text"
+                    placeholder="Search by title, tags, or description..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="max-w-md"
+                  />
+                </div>
+
                 {/* Category Chips */}
                 <div className="space-y-2">
                   <Label className="text-sm font-medium">Category</Label>
