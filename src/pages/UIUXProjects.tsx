@@ -25,6 +25,8 @@ const UIUXProjects = () => {
       .from("projects")
       .select("title, tags, slug, image_url, short_description")
       .eq("category", "UI/UX Design")
+      .eq("hidden", false)
+      .eq("draft", false)
       .order("year", { ascending: false })
       .order("month", { ascending: false });
 

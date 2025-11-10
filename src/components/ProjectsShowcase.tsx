@@ -24,6 +24,8 @@ export const ProjectsShowcase = () => {
       .from("projects")
       .select("title, tags, slug, image_url, short_description, category")
       .eq("featured", true)
+      .eq("hidden", false)
+      .eq("draft", false)
       .order("created_at", { ascending: false });
 
     if (!error && data) {

@@ -25,6 +25,8 @@ const GraphicDesign = () => {
       .from("projects")
       .select("title, tags, slug, image_url, short_description")
       .eq("category", "Graphic Design")
+      .eq("hidden", false)
+      .eq("draft", false)
       .order("year", { ascending: false })
       .order("month", { ascending: false });
 

@@ -34,6 +34,8 @@ interface Project {
   tags: string[];
   slug: string;
   project_link: string | null;
+  hidden: boolean;
+  draft: boolean;
 }
 
 const Admin = () => {
@@ -58,6 +60,22 @@ const Admin = () => {
   const [slug, setSlug] = useState("");
   const [projectLink, setProjectLink] = useState("");
   const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>([]);
+  const [hidden, setHidden] = useState(false);
+  const [draft, setDraft] = useState(false);
+
+  // Filter states
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(
+    localStorage.getItem("adminFilterCategory") || null
+  );
+  const [featuredFilter, setFeaturedFilter] = useState<"all" | "featured" | "non-featured">(
+    (localStorage.getItem("adminFilterFeatured") as "all" | "featured" | "non-featured") || "all"
+  );
+  const [visibilityFilter, setVisibilityFilter] = useState<"all" | "visible" | "hidden">(
+    (localStorage.getItem("adminFilterVisibility") as "all" | "visible" | "hidden") || "all"
+  );
+  const [sortOrder, setSortOrder] = useState<"newest" | "oldest">(
+    (localStorage.getItem("adminSortOrder") as "newest" | "oldest") || "newest"
+  );
 
   const MAX_SHORT_DESC_CHARS = 300;
 
@@ -109,6 +127,8 @@ const Admin = () => {
     setSlug("");
     setProjectLink("");
     setContentBlocks([]);
+    setHidden(false);
+    setDraft(false);
     setEditingProject(null);
   };
 
@@ -192,6 +212,8 @@ const Admin = () => {
         .filter(Boolean),
       slug: slug || title.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
       project_link: projectLink || null,
+      hidden,
+      draft,
     };
 
     let projectId = editingProject?.id;
@@ -280,6 +302,8 @@ const Admin = () => {
     setTags(project.tags.join(", "));
     setSlug(project.slug);
     setProjectLink(project.project_link || "");
+    setHidden(project.hidden);
+    setDraft(project.draft);
 
     // Fetch content blocks
     const { data: blocks } = await supabase
@@ -315,10 +339,74 @@ const Admin = () => {
     }
   };
 
+  const handleToggleVisibility = async (project: Project) => {
+    const { error } = await supabase
+      .from("projects")
+      .update({ hidden: !project.hidden })
+      .eq("id", project.id);
+
+    if (error) {
+      toast({
+        variant: "destructive",
+        title: "Error updating project",
+        description: error.message,
+      });
+    } else {
+      toast({
+        title: project.hidden ? "Project shown" : "Project hidden",
+        description: `The project is now ${project.hidden ? "visible" : "hidden"}.`,
+      });
+      fetchProjects();
+    }
+  };
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate("/login");
   };
+
+  // Persist filter states
+  useEffect(() => {
+    if (selectedCategory) {
+      localStorage.setItem("adminFilterCategory", selectedCategory);
+    } else {
+      localStorage.removeItem("adminFilterCategory");
+    }
+  }, [selectedCategory]);
+
+  useEffect(() => {
+    localStorage.setItem("adminFilterFeatured", featuredFilter);
+  }, [featuredFilter]);
+
+  useEffect(() => {
+    localStorage.setItem("adminFilterVisibility", visibilityFilter);
+  }, [visibilityFilter]);
+
+  useEffect(() => {
+    localStorage.setItem("adminSortOrder", sortOrder);
+  }, [sortOrder]);
+
+  // Filter and sort projects
+  const filteredProjects = projects
+    .filter((project) => {
+      // Category filter
+      if (selectedCategory && project.category !== selectedCategory) return false;
+
+      // Featured filter
+      if (featuredFilter === "featured" && !project.featured) return false;
+      if (featuredFilter === "non-featured" && project.featured) return false;
+
+      // Visibility filter
+      if (visibilityFilter === "visible" && project.hidden) return false;
+      if (visibilityFilter === "hidden" && !project.hidden) return false;
+
+      return true;
+    })
+    .sort((a, b) => {
+      const dateA = new Date(a.year, a.month - 1).getTime();
+      const dateB = new Date(b.year, b.month - 1).getTime();
+      return sortOrder === "newest" ? dateB - dateA : dateA - dateB;
+    });
 
   if (loading) {
     return (
@@ -502,15 +590,39 @@ const Admin = () => {
               </p>
             </div>
 
-            <div className="flex items-center space-x-2">
-              <Checkbox
-                id="featured"
-                checked={featured}
-                onCheckedChange={(checked) => setFeatured(checked as boolean)}
-              />
-              <Label htmlFor="featured" className="cursor-pointer">
-                Featured Project (show on homepage)
-              </Label>
+            <div className="space-y-4">
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="featured"
+                  checked={featured}
+                  onCheckedChange={(checked) => setFeatured(checked as boolean)}
+                />
+                <Label htmlFor="featured" className="cursor-pointer">
+                  Featured Project (show on homepage)
+                </Label>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="draft"
+                  checked={draft}
+                  onCheckedChange={(checked) => setDraft(checked as boolean)}
+                />
+                <Label htmlFor="draft" className="cursor-pointer">
+                  Save as Draft (page generated but not public)
+                </Label>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="hidden"
+                  checked={hidden}
+                  onCheckedChange={(checked) => setHidden(checked as boolean)}
+                />
+                <Label htmlFor="hidden" className="cursor-pointer">
+                  Hide Project (not visible on public portfolio)
+                </Label>
+              </div>
             </div>
 
             <div className="border-t border-border pt-6">
@@ -534,22 +646,116 @@ const Admin = () => {
           </form>
 
           {/* Projects List */}
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-heading">All Projects</h2>
-            {projects.map((project) => (
+          <div className="space-y-6">
+            <div className="space-y-4">
+              <h2 className="text-2xl font-bold text-heading">All Projects</h2>
+              
+              {/* Filters */}
+              <div className="bg-card p-4 rounded-lg shadow-sm space-y-4">
+                {/* Category Chips */}
+                <div className="space-y-2">
+                  <Label className="text-sm font-medium">Category</Label>
+                  <div className="flex flex-wrap gap-2">
+                    {["UI/UX Design", "Graphic Design", "AI Tools"].map((cat) => (
+                      <Button
+                        key={cat}
+                        variant={selectedCategory === cat ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => setSelectedCategory(selectedCategory === cat ? null : cat)}
+                        className="transition-all"
+                      >
+                        {cat}
+                      </Button>
+                    ))}
+                    {selectedCategory && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setSelectedCategory(null)}
+                        className="text-muted-foreground"
+                      >
+                        Clear
+                      </Button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Toggles and Sort */}
+                <div className="flex flex-wrap gap-4 items-center">
+                  <div className="space-y-1">
+                    <Label className="text-sm font-medium">Featured</Label>
+                    <Select value={featuredFilter} onValueChange={(v: any) => setFeaturedFilter(v)}>
+                      <SelectTrigger className="w-[160px]">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Projects</SelectItem>
+                        <SelectItem value="featured">Featured Only</SelectItem>
+                        <SelectItem value="non-featured">Non-Featured</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-1">
+                    <Label className="text-sm font-medium">Visibility</Label>
+                    <Select value={visibilityFilter} onValueChange={(v: any) => setVisibilityFilter(v)}>
+                      <SelectTrigger className="w-[160px]">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Projects</SelectItem>
+                        <SelectItem value="visible">Visible Only</SelectItem>
+                        <SelectItem value="hidden">Hidden Only</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-1">
+                    <Label className="text-sm font-medium">Sort By</Label>
+                    <Select value={sortOrder} onValueChange={(v: any) => setSortOrder(v)}>
+                      <SelectTrigger className="w-[160px]">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="newest">Newest First</SelectItem>
+                        <SelectItem value="oldest">Oldest First</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <div className="text-sm text-muted-foreground">
+                  Showing {filteredProjects.length} of {projects.length} projects
+                </div>
+              </div>
+            </div>
+
+            {filteredProjects.map((project) => (
               <div
                 key={project.id}
                 className="bg-card p-6 rounded-lg shadow-sm flex justify-between items-start"
               >
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-heading mb-2">
-                    {project.title}
+                  <div className="flex items-center gap-2 mb-2">
+                    <h3 className="text-xl font-bold text-heading">
+                      {project.title}
+                    </h3>
                     {project.featured && (
-                      <span className="ml-2 text-xs bg-lemon text-black px-2 py-1 rounded">
+                      <span className="text-xs bg-lemon text-black px-2 py-1 rounded font-medium">
                         Featured
                       </span>
                     )}
-                  </h3>
+                    {project.draft && (
+                      <span className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded font-medium border">
+                        Draft
+                      </span>
+                    )}
+                    {project.hidden && (
+                      <span className="text-xs bg-destructive/10 text-destructive px-2 py-1 rounded font-medium border border-destructive/20">
+                        Hidden
+                      </span>
+                    )}
+                  </div>
                   <p className="text-sm text-muted-foreground mb-2">
                     {project.category} •{" "}
                     {new Date(project.year, project.month - 1).toLocaleString(
@@ -559,13 +765,20 @@ const Admin = () => {
                   </p>
                   <p className="text-foreground">{project.short_description}</p>
                 </div>
-                <div className="flex gap-2 ml-4">
+                <div className="flex flex-col gap-2 ml-4">
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => handleEdit(project)}
                   >
                     Edit
+                  </Button>
+                  <Button
+                    variant={project.hidden ? "default" : "secondary"}
+                    size="sm"
+                    onClick={() => handleToggleVisibility(project)}
+                  >
+                    {project.hidden ? "Show" : "Hide"}
                   </Button>
                   <Button
                     variant="destructive"

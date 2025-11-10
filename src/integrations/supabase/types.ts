@@ -56,8 +56,10 @@ export type Database = {
         Row: {
           category: string
           created_at: string
+          draft: boolean
           featured: boolean
           full_content: string
+          hidden: boolean
           id: string
           image_url: string | null
           month: number
@@ -72,8 +74,10 @@ export type Database = {
         Insert: {
           category: string
           created_at?: string
+          draft?: boolean
           featured?: boolean
           full_content: string
+          hidden?: boolean
           id?: string
           image_url?: string | null
           month: number
@@ -88,8 +92,10 @@ export type Database = {
         Update: {
           category?: string
           created_at?: string
+          draft?: boolean
           featured?: boolean
           full_content?: string
+          hidden?: boolean
           id?: string
           image_url?: string | null
           month?: number
