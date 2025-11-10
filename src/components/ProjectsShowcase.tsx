@@ -30,7 +30,7 @@ export const ProjectsShowcase = () => {
       .order("created_at", { ascending: false });
 
     if (!error && data) {
-      setProjects(data.map(p => ({ ...p, image: p.image_url })));
+      setProjects(data.map((p) => ({ ...p, image: p.image_url })));
     }
     setLoading(false);
   };
@@ -42,7 +42,10 @@ export const ProjectsShowcase = () => {
           <Skeleton className="h-12 w-80 mx-auto mb-12" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="bg-card rounded-lg overflow-hidden shadow-sm">
+              <div
+                key={i}
+                className="bg-card rounded-lg overflow-hidden shadow-sm"
+              >
                 <Skeleton className="aspect-video w-full" />
                 <div className="p-6 space-y-4">
                   <Skeleton className="h-8 w-3/4" />
@@ -67,6 +70,9 @@ export const ProjectsShowcase = () => {
         <h2 className="text-4xl md:text-5xl font-bold text-heading text-center mb-12">
           <span className="highlight-heading">Featured Projects</span>
         </h2>
+        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+          Check more of my projects on the respected sections!
+        </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project, index) => (
             <div
@@ -74,7 +80,13 @@ export const ProjectsShowcase = () => {
               className="animate-fade-in-up"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <ProjectCard {...project} image={project.image_url} short_description={project.short_description} category={project.category} showCategory={true} />
+              <ProjectCard
+                {...project}
+                image={project.image_url}
+                short_description={project.short_description}
+                category={project.category}
+                showCategory={true}
+              />
             </div>
           ))}
         </div>
