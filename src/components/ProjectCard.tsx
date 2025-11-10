@@ -12,14 +12,22 @@ interface ProjectCardProps {
   showCategory?: boolean;
 }
 
-export const ProjectCard = ({ title, tags, slug, image, short_description, category, showCategory = false }: ProjectCardProps) => {
+export const ProjectCard = ({
+  title,
+  tags,
+  slug,
+  image,
+  short_description,
+  category,
+  showCategory = false,
+}: ProjectCardProps) => {
   return (
     <Link to={`/projects/${slug}`}>
       <div className="bg-card rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
         {/* Project Image */}
         <div className="aspect-video overflow-hidden bg-muted relative">
-          <LazyImage 
-            src={image} 
+          <LazyImage
+            src={image}
             alt={title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             skeletonClassName="w-full h-full"
@@ -30,7 +38,7 @@ export const ProjectCard = ({ title, tags, slug, image, short_description, categ
             </span>
           )}
         </div>
-        
+
         {/* Project Info */}
         <div className="p-6">
           <div className="flex items-center justify-between mb-3">
@@ -40,7 +48,7 @@ export const ProjectCard = ({ title, tags, slug, image, short_description, categ
             <ArrowRight className="w-6 h-6 text-lemon group-hover:translate-x-2 transition-transform" />
           </div>
           <div className="flex flex-wrap gap-2 mb-3">
-            {tags.slice(0, 4).map((tag) => (
+            {tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
                 className="px-3 py-1 text-sm rounded-full bg-muted text-foreground"
@@ -49,9 +57,7 @@ export const ProjectCard = ({ title, tags, slug, image, short_description, categ
               </span>
             ))}
           </div>
-          <p className="text-sm text-muted-foreground">
-            {short_description}
-          </p>
+          <p className="text-sm text-muted-foreground">{short_description}</p>
         </div>
       </div>
     </Link>
