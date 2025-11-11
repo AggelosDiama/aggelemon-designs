@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { ExternalLink } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -813,6 +814,15 @@ const Admin = () => {
                   <p className="text-foreground">{project.short_description}</p>
                 </div>
                 <div className="flex flex-col gap-2 ml-4">
+                  <Link to={`/projects/${project.slug}`} target="_blank" rel="noopener noreferrer">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="w-full"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </Button>
+                  </Link>
                   <Button
                     variant="outline"
                     size="sm"
