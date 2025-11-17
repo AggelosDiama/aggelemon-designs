@@ -20,7 +20,7 @@ export const Footer = () => {
                 scale: [1, 2, 1],
                 transition: { duration: 0.6, times: [0, 0.5, 1] },
               }}
-              viewport={{ once: true, margin: "0px" }}
+              viewport={{ margin: "0px" }}
             >
               <motion.div
                 initial={{ color: "hsl(var(--heading))" }}
@@ -59,7 +59,7 @@ export const Footer = () => {
                   ],
                   transition: { duration: 0.6, times: [0, 0.5, 1], delay: 0.1 },
                 }}
-                viewport={{ once: true, margin: "0px" }}
+                viewport={{ margin: "0px" }}
               >
                 <Mail className="w-8 h-8 transition-colors" />
               </motion.div>
