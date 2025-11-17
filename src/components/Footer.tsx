@@ -22,7 +22,20 @@ export const Footer = () => {
               }}
               viewport={{ once: true, margin: "0px" }}
             >
-              <Linkedin className="w-8 h-8 text-heading group-hover:text-lemon transition-colors" />
+              <motion.div
+                initial={{ color: "hsl(var(--heading))" }}
+                whileInView={{
+                  color: [
+                    "hsl(var(--heading))",
+                    "hsl(var(--lemon))",
+                    "hsl(var(--heading))",
+                  ],
+                  transition: { duration: 0.6, times: [0, 0.5, 1] },
+                }}
+                viewport={{ once: true, margin: "0px" }}
+              >
+                <Linkedin className="w-8 h-8 transition-colors" />
+              </motion.div>
             </motion.a>
 
             <motion.a
@@ -36,7 +49,20 @@ export const Footer = () => {
               }}
               viewport={{ once: true, margin: "0px" }}
             >
-              <Mail className="w-8 h-8 text-heading group-hover:text-lemon transition-colors" />
+              <motion.div
+                initial={{ color: "hsl(var(--heading))" }}
+                whileInView={{
+                  color: [
+                    "hsl(var(--heading))",
+                    "hsl(var(--lemon))",
+                    "hsl(var(--heading))",
+                  ],
+                  transition: { duration: 0.6, times: [0, 0.5, 1], delay: 0.1 },
+                }}
+                viewport={{ once: true, margin: "0px" }}
+              >
+                <Mail className="w-8 h-8 transition-colors" />
+              </motion.div>
             </motion.a>
           </div>
 
