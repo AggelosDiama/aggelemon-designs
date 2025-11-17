@@ -22,7 +22,7 @@ export const Footer = () => {
                 scale: [1, 1.15, 1],
                 transition: { duration: 0.6, times: [0, 0.5, 1] }
               }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ margin: "-100px" }}
             >
               <Linkedin className="w-8 h-8 text-heading group-hover:text-lemon transition-colors" />
             </motion.a>
@@ -36,7 +36,7 @@ export const Footer = () => {
                 scale: [1, 1.15, 1],
                 transition: { duration: 0.6, times: [0, 0.5, 1], delay: 0.1 }
               }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ margin: "-100px" }}
             >
               <Mail className="w-8 h-8 text-heading group-hover:text-lemon transition-colors" />
             </motion.a>
