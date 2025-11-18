@@ -55,7 +55,9 @@ export const AboutSection = () => {
               <p className="text-sm text-muted-foreground text-center">
                 or you can{" "}
                 <span className="highlight-text font-semibold text-heading">
-                  <a href="https://linkly.link/2KW66">click here!</a>
+                  <a href="https://linkly.link/2KW66" target="_blank">
+                    click here!
+                  </a>
                 </span>
               </p>
             </div>
