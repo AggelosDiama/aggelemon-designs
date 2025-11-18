@@ -32,14 +32,32 @@ export const AboutSection = () => {
             {/* Top Left: Opening Snapshot */}
             <div>
               <p className="text-lg text-foreground leading-relaxed">
-                I see design as a way to solve real problems, not just to create and impress. My style <span className="highlight-text font-semibold text-heading">leans toward minimalism</span>, but every project starts with <span className="highlight-text font-semibold text-heading">questions, research, and curiosity</span>. I treat each challenge as a chance to think differently, even when it means stepping outside my comfort zone.
+                I see design as a way to solve real problems, not just to create
+                and impress. My style{" "}
+                <span className="highlight-text font-semibold text-heading">
+                  leans toward minimalism
+                </span>
+                , but every project starts with{" "}
+                <span className="highlight-text font-semibold text-heading">
+                  questions, research, and curiosity
+                </span>
+                . I treat each challenge as a chance to think differently, even
+                when it means stepping outside my comfort zone.
               </p>
             </div>
 
             {/* Top Right: QR Code */}
             <div className="flex flex-col items-center justify-center p-6 rounded-lg bg-card border border-border">
               <img src={cvQRCode} alt="CV QR Code" className="w-48 h-48 mb-3" />
-              <p className="text-sm text-muted-foreground text-center">Scan QR for my CV</p>
+              <p className="text-sm text-muted-foreground text-center">
+                Scan QR for my CV
+              </p>
+              <p className="text-sm text-muted-foreground text-center">
+                or you can{" "}
+                <span className="highlight-text font-semibold text-heading">
+                  <a href="https://linkly.link/2KW66">click here!</a>
+                </span>
+              </p>
             </div>
 
             {/* Bottom Left: Skills */}
