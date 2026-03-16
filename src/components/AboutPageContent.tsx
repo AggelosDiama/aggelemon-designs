@@ -1,8 +1,7 @@
-import { CheckCircle2 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import cvQRCode from "@/assets/cv-qr-code.png";
 
-const skills = [
+const designSkills = [
   "UI/UX Design",
   "Prototyping",
   "Visual Design & Branding",
@@ -11,12 +10,16 @@ const skills = [
   "Usability Testing",
   "Design Systems",
   "Responsive Design",
+  "Accessibility & Inclusive Design",
+  "Cross-functional Collaboration",
+];
+
+const tools = [
   "Figma",
   "Adobe Creative Suite",
   "Affinity Suite",
-  "Frontend Basics (HTML/CSS)",
-  "Cross-functional Collaboration",
-  "Accessibility & Inclusive Design",
+  "HTML/CSS",
+  "Python",
 ];
 
 const lemonFacts = [
@@ -77,15 +80,27 @@ export const AboutPageContent = () => {
 
           {/* Skills & Lemon Facts Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Skills */}
+            {/* Skills & Tools as Chips */}
             <div>
               <h3 className="text-2xl font-bold text-heading mb-4">Skills & Tools</h3>
-              <div className="grid grid-cols-1 gap-3">
-                {skills.map((skill) => (
-                  <div key={skill} className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-lemon flex-shrink-0 mt-0.5" />
-                    <span className="text-foreground">{skill}</span>
-                  </div>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {designSkills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-3 py-1.5 text-sm rounded-full bg-muted text-foreground border border-border font-medium"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {tools.map((tool) => (
+                  <span
+                    key={tool}
+                    className="px-3 py-1.5 text-sm rounded-full bg-card text-foreground border border-border font-mono"
+                  >
+                    {tool}
+                  </span>
                 ))}
               </div>
             </div>

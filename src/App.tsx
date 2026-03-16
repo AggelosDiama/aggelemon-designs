@@ -28,9 +28,9 @@ const App = () => (
         <PageTransition>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/uiux-projects" element={<UIUXProjects />} />
-            <Route path="/graphic-design" element={<GraphicDesign />} />
-            <Route path="/ai-tools" element={<AITools />} />
+            <Route path="/product-uiux" element={<UIUXProjects />} />
+            <Route path="/visual-identity" element={<GraphicDesign />} />
+            <Route path="/ai-engineering" element={<AITools />} />
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />

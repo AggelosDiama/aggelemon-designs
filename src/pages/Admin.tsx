@@ -53,7 +53,7 @@ const Admin = () => {
   const [year, setYear] = useState<number>(new Date().getFullYear());
   const [shortDescription, setShortDescription] = useState("");
   const [fullContent, setFullContent] = useState("");
-  const [category, setCategory] = useState<string>("UI/UX Design");
+  const [category, setCategory] = useState<string>("Product & UI/UX Design");
   const [featured, setFeatured] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -123,7 +123,7 @@ const Admin = () => {
     setYear(new Date().getFullYear());
     setShortDescription("");
     setFullContent("");
-    setCategory("UI/UX Design");
+    setCategory("Product & UI/UX Design");
     setFeatured(false);
     setImageUrl("");
     setImageFile(null);
@@ -521,11 +521,9 @@ const Admin = () => {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="UI/UX Design">UI/UX Design</SelectItem>
-                    <SelectItem value="Graphic Design">
-                      Graphic Design
-                    </SelectItem>
-                    <SelectItem value="AI Tools">AI Tools</SelectItem>
+                    <SelectItem value="Product & UI/UX Design">Product & UI/UX Design</SelectItem>
+                    <SelectItem value="Visual Identity & Branding">Visual Identity & Branding</SelectItem>
+                    <SelectItem value="AI Engineering & Agents">AI Engineering & Agents</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -704,7 +702,7 @@ const Admin = () => {
                 <div className="space-y-2">
                   <Label className="text-sm font-medium">Category</Label>
                   <div className="flex flex-wrap gap-2">
-                    {["UI/UX Design", "Graphic Design", "AI Tools"].map((cat) => (
+                    {["Product & UI/UX Design", "Visual Identity & Branding", "AI Engineering & Agents"].map((cat) => (
                       <Button
                         key={cat}
                         variant={selectedCategory === cat ? "default" : "outline"}

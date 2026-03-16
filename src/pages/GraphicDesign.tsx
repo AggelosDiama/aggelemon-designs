@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Palette, PenTool } from "lucide-react";
 
 interface Project {
   title: string;
@@ -25,7 +26,7 @@ const GraphicDesign = () => {
     const { data, error } = await supabase
       .from("projects")
       .select("title, tags, slug, image_url, short_description")
-      .eq("category", "Graphic Design")
+      .eq("category", "Visual Identity & Branding")
       .eq("hidden", false)
       .eq("draft", false)
       .order("year", { ascending: false })
@@ -75,13 +76,22 @@ const GraphicDesign = () => {
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold text-heading text-center mb-4">
-            Graphic Design
+            Visual Identity & Branding
           </h1>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Bold visual storytelling through graphics, branding, and creative design.
+            Bold visual storytelling through branding, identity systems, and creative design leadership.
           </p>
           {projects.length === 0 ? (
-            <p className="text-center text-muted-foreground">No projects found in this category yet.</p>
+            <div className="text-center py-20 space-y-6">
+              <div className="flex justify-center gap-4">
+                <Palette className="w-16 h-16 text-muted-foreground/40" />
+                <PenTool className="w-12 h-12 text-lemon/40 -mt-2" />
+              </div>
+              <h3 className="text-2xl font-bold text-heading">No Projects Yet</h3>
+              <p className="text-muted-foreground max-w-md mx-auto">
+                Visual identity and branding projects will appear here soon.
+              </p>
+            </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {projects.map((project, index) => (
