@@ -73,9 +73,9 @@ const Signup = () => {
             />
           </div>
 
-          {/* <Button type="submit" className="w-full" disabled={loading}>
+          <Button type="submit" className="w-full" disabled={loading}>
             {loading ? "Creating account..." : "Sign Up"}
-          </Button> */}
+          </Button>
 
           <p className="text-center text-sm text-muted-foreground">
             Already have an account?{" "}
