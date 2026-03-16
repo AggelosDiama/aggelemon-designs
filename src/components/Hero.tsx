@@ -34,7 +34,7 @@ export const Hero = () => {
                 Whether I’m building a UI or an AI agent, I’m driven to find smarter ways to <span className="highlight-text font-semibold text-heading">bridge the gap between user needs and technical possibility.</span>
                 <br></br>
                 <br></br>
-                Right now, I’m building production-ready AI tools and collaborating with people who share the same drive to create, solve, and innovate.
+                Right now, I’m building production-ready AI tools and collaborating with people who share the same drive to <span className="highlight-text font-semibold text-heading">create, solve, and innovate.</span>
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl pt-2">
                 Get in touch with me by connecting on{" "}
