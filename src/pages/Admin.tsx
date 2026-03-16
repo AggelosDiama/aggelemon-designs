@@ -53,7 +53,7 @@ const Admin = () => {
   const [year, setYear] = useState<number>(new Date().getFullYear());
   const [shortDescription, setShortDescription] = useState("");
   const [fullContent, setFullContent] = useState("");
-  const [category, setCategory] = useState<string>("UI/UX Design");
+  const [category, setCategory] = useState<string>("Product & UI/UX Design");
   const [featured, setFeatured] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
