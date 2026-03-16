@@ -1,0 +1,1 @@
+ALTER TABLE public.projects ADD CONSTRAINT projects_category_check CHECK (category = ANY (ARRAY['Product & UI/UX Design'::text, 'Visual Identity & Branding'::text, 'AI Engineering & Agents'::text]));
