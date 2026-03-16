@@ -5,9 +5,9 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
+  { name: "AI Engineering & Agents", path: "/ai-engineering" },
   { name: "Product & UI/UX", path: "/product-uiux" },
   { name: "Visual Identity & Branding", path: "/visual-identity" },
-  { name: "AI Engineering & Agents", path: "/ai-engineering" },
   { name: "About Me", path: "/about" },
   { name: "Contact", path: "#contact" },
 ];
