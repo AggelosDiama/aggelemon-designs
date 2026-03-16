@@ -3,19 +3,24 @@ import cvQRCode from "@/assets/cv-qr-code.png";
 const designSkills = [
   "UI/UX Design",
   "Prototyping",
-  "Visual Design & Branding",
   "User Research",
   "Journey Mapping",
   "Usability Testing",
   "Design Systems",
   "Responsive Design",
-];
-
-const tools = [
+  "Accessibility & Inclusive Design",
   "Figma",
   "Adobe Creative Suite",
   "Affinity Suite",
+];
+
+const tools = [
+  "AI Agents",
+  "RAG Systems",
+  "LLM Orchestration",
+  "Docker",
   "HTML/CSS",
+  "JavaScript",
   "Python",
 ];
 

@@ -10,7 +10,6 @@ const designSkills = [
   "Design Systems",
   "Responsive Design",
   "Accessibility & Inclusive Design",
-  "Cross-functional Collaboration",
   "Figma",
   "Adobe Creative Suite",
   "Affinity Suite",
