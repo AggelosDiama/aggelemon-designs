@@ -24,10 +24,14 @@ export const Hero = () => {
                 I'm Aggelos, you can call me <span className="highlight-heading">Lemon</span>
               </h1>
               <h2 className="text-2xl md:text-3xl font-semibold text-heading">
-                <span className="highlight-heading">Graphic & UI/UX Designer</span>
+                <span className="highlight-heading">Architecting Intelligent Products: Where AI Engineering meets UX.</span>
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
-                I was always the tech guy, but I realized technology can be <span className="highlight-text font-semibold text-heading">deeply creative</span>. It's not just about code and algorithms, but it's about <span className="highlight-text font-semibold text-heading">people, ideas, and the problems we try to solve</span>. Whether it's a logo, a post, a website, or an app, I'm drawn to finding smarter, more efficient ways to make things work better. AI adds another layer to that curiosity, helping me explore <span className="highlight-text font-semibold text-heading">how a prompt can create and improve</span>. Right now, I'm learning through new experiences and projects, connecting with people who share the same drive to create and solve.
+                I was always the 'tech guy' with a Computer Engineering background , but I’ve realized that the most powerful technology is <span className="highlight-text font-semibold text-heading">deeply human</span>. To me, it’s not just about writing code or optimizing algorithms. It’s about <span className="highlight-text font-semibold text-heading">why and how people using them</span> and the complex problems we try to solve.
+
+                Whether I’m designing a UI or developing an AI agent, I’m driven to find smarter ways to make things work. I believe AI adds a transformative layer to this, moving beyond simple prompts to creating RAG-based systems and LLM orchestrations that actually understand user needs.
+
+                Right now, I’m building production-ready AI tools and collaborating with people who share the same drive to create, solve, and innovate at the intersection of intelligence and design.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl pt-2">
                 Get in touch with me by connecting on{" "}
