@@ -24,17 +24,14 @@ export const Hero = () => {
                 I'm Aggelos, you can call me <span className="highlight-heading">Lemon</span>
               </h1>
               <h2 className="text-2xl md:text-3xl font-semibold text-heading">
-                <span className="highlight-heading">Making Intelligent Products: <br></br>
-                Where AI Engineering meets UX.</span>
+                Making Intelligent Products: <br></br>
+                <span className="highlight-heading">Where AI Engineering meets UX.</span>
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
-                I’ve always been the 'tech guy' with a Computer Engineering background , but I’ve realized that the most powerful technology is <span className="highlight-text font-semibold text-heading">deeply human</span>. To me, it’s not just about code or algorithms. It’s about <span className="highlight-text font-semibold text-heading">why and how people using them</span> and the complex problems we try to solve.
+                I’ve always been the 'tech guy' with a Computer Engineering background, but realized that the most powerful technology is <span className="highlight-text font-semibold text-heading">deeply human</span>. To me, it’s not just about code or algorithms. It’s about <span className="highlight-text font-semibold text-heading">why and how people using them</span> and the complex problems we try to solve.
                 <br></br>
                 <br></br>
                 Whether I’m building a UI or an AI agent, I’m driven to find smarter ways to <span className="highlight-text font-semibold text-heading">bridge the gap between user needs and technical possibility.</span>
-                <br></br>
-                <br></br>
-                Right now, I’m building production-ready AI tools and collaborating with people who share the same drive to <span className="highlight-text font-semibold text-heading">create, solve, and innovate.</span>
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl pt-2">
                 Get in touch with me by connecting on{" "}
