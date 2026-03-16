@@ -702,7 +702,7 @@ const Admin = () => {
                 <div className="space-y-2">
                   <Label className="text-sm font-medium">Category</Label>
                   <div className="flex flex-wrap gap-2">
-                    {["UI/UX Design", "Graphic Design", "AI Tools"].map((cat) => (
+                    {["Product & UI/UX Design", "Visual Identity & Branding", "AI Engineering & Agents"].map((cat) => (
                       <Button
                         key={cat}
                         variant={selectedCategory === cat ? "default" : "outline"}

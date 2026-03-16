@@ -5,9 +5,9 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-  { name: "UI/UX Projects", path: "/uiux-projects" },
-  { name: "Graphic Design", path: "/graphic-design" },
-  { name: "AI & Tools", path: "/ai-tools" },
+  { name: "Product & UI/UX", path: "/product-uiux" },
+  { name: "Visual Identity & Branding", path: "/visual-identity" },
+  { name: "AI Engineering & Agents", path: "/ai-engineering" },
   { name: "About Me", path: "/about" },
   { name: "Contact", path: "#contact" },
 ];
@@ -19,7 +19,6 @@ export const Header = () => {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 animate-fade-in">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
           <NavLink 
             to="/" 
             className="text-2xl font-bold text-heading hover:text-lemon transition-colors"
@@ -27,7 +26,6 @@ export const Header = () => {
             Lemon 🍋
           </NavLink>
 
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => {
               if (link.path === "#contact") {
@@ -68,7 +66,6 @@ export const Header = () => {
             })}
           </nav>
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2 text-heading hover:text-lemon transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -78,7 +75,6 @@ export const Header = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <nav className="md:hidden py-4 space-y-4 animate-fade-in">
             {navLinks.map((link) => {

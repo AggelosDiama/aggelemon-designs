@@ -1,7 +1,6 @@
-import { CheckCircle2 } from "lucide-react";
 import cvQRCode from "@/assets/cv-qr-code.png";
 
-const skills = [
+const designSkills = [
   "UI/UX Design",
   "Prototyping",
   "Visual Design & Branding",
@@ -10,6 +9,14 @@ const skills = [
   "Usability Testing",
   "Design Systems",
   "Responsive Design",
+];
+
+const tools = [
+  "Figma",
+  "Adobe Creative Suite",
+  "Affinity Suite",
+  "HTML/CSS",
+  "Python",
 ];
 
 const lemonFacts = [
@@ -27,7 +34,6 @@ export const AboutSection = () => {
         </h2>
 
         <div className="max-w-5xl mx-auto">
-          {/* 2x2 Grid Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             {/* Top Left: Opening Snapshot */}
             <div>
@@ -62,15 +68,27 @@ export const AboutSection = () => {
               </p>
             </div>
 
-            {/* Bottom Left: Skills */}
+            {/* Bottom Left: Skills & Tools as Chips */}
             <div>
-              <h3 className="text-2xl font-bold text-heading mb-4">Skills</h3>
-              <div className="grid grid-cols-1 gap-3">
-                {skills.map((skill) => (
-                  <div key={skill} className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-lemon flex-shrink-0 mt-0.5" />
-                    <span className="text-foreground">{skill}</span>
-                  </div>
+              <h3 className="text-2xl font-bold text-heading mb-4">Skills & Tools</h3>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {designSkills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-3 py-1.5 text-sm rounded-full bg-muted text-foreground border border-border font-medium"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {tools.map((tool) => (
+                  <span
+                    key={tool}
+                    className="px-3 py-1.5 text-sm rounded-full bg-card text-foreground border border-border font-mono"
+                  >
+                    {tool}
+                  </span>
                 ))}
               </div>
             </div>

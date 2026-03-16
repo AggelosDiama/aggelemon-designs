@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Layout, Lightbulb } from "lucide-react";
 
 interface Project {
   title: string;
@@ -25,7 +26,7 @@ const UIUXProjects = () => {
     const { data, error } = await supabase
       .from("projects")
       .select("title, tags, slug, image_url, short_description")
-      .eq("category", "UI/UX Design")
+      .eq("category", "Product & UI/UX Design")
       .eq("hidden", false)
       .eq("draft", false)
       .order("year", { ascending: false })
@@ -36,6 +37,7 @@ const UIUXProjects = () => {
     }
     setLoading(false);
   };
+
   if (loading) {
     return (
       <main className="min-h-screen">
@@ -74,23 +76,32 @@ const UIUXProjects = () => {
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold text-heading text-center mb-4">
-            UI/UX Projects
+            Product & UI/UX Design
           </h1>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-            User-centered digital experiences crafted with attention to detail and seamless interactions.
+            User-centered digital experiences built on research, empathy, and seamless interactions.
           </p>
           {projects.length === 0 ? (
-            <p className="text-center text-muted-foreground">No projects found in this category yet.</p>
+            <div className="text-center py-20 space-y-6">
+              <div className="flex justify-center gap-4">
+                <Layout className="w-16 h-16 text-muted-foreground/40" />
+                <Lightbulb className="w-12 h-12 text-lemon/40 -mt-2" />
+              </div>
+              <h3 className="text-2xl font-bold text-heading">No Projects Yet</h3>
+              <p className="text-muted-foreground max-w-md mx-auto">
+                Product and UI/UX design projects will appear here soon.
+              </p>
+            </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {projects.map((project, index) => (
-              <div
-                key={project.slug}
-                className="animate-fade-in-up"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <ProjectCard {...project} image={project.image_url} short_description={project.short_description} />
-              </div>
+                <div
+                  key={project.slug}
+                  className="animate-fade-in-up"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <ProjectCard {...project} image={project.image_url} short_description={project.short_description} />
+                </div>
               ))}
             </div>
           )}

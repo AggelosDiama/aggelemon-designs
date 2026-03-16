@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Bot, Sparkles } from "lucide-react";
 
 interface Project {
   title: string;
@@ -25,7 +26,7 @@ const AITools = () => {
     const { data, error } = await supabase
       .from("projects")
       .select("title, tags, slug, image_url, short_description")
-      .eq("category", "AI Tools")
+      .eq("category", "AI Engineering & Agents")
       .eq("hidden", false)
       .eq("draft", false)
       .order("year", { ascending: false })
@@ -75,13 +76,22 @@ const AITools = () => {
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold text-heading text-center mb-4">
-            AI & Tools
+            AI Engineering & Agents
           </h1>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Exploring how AI elevates creativity and makes design workflows smarter and more efficient.
+            Building intelligent systems, AI-powered tools, and autonomous agents that solve real problems.
           </p>
           {projects.length === 0 ? (
-            <p className="text-center text-muted-foreground">No projects found in this category yet.</p>
+            <div className="text-center py-20 space-y-6">
+              <div className="flex justify-center gap-4">
+                <Bot className="w-16 h-16 text-muted-foreground/40" />
+                <Sparkles className="w-12 h-12 text-lemon/40 -mt-2" />
+              </div>
+              <h3 className="text-2xl font-bold text-heading">Coming Soon</h3>
+              <p className="text-muted-foreground max-w-md mx-auto">
+                AI engineering projects are in the works. Check back soon for autonomous agents, intelligent workflows, and more.
+              </p>
+            </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {projects.map((project, index) => (
