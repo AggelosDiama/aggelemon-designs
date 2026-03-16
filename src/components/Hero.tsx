@@ -24,7 +24,8 @@ export const Hero = () => {
                 I'm Aggelos, you can call me <span className="highlight-heading">Lemon</span>
               </h1>
               <h2 className="text-2xl md:text-3xl font-semibold text-heading">
-                <span className="highlight-heading">Making Intelligent Products: Where AI Engineering meets UX.</span>
+                <span className="highlight-heading">Making Intelligent Products: <br></br>
+                Where AI Engineering meets UX.</span>
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
                 I’ve always been the 'tech guy' with a Computer Engineering background , but I’ve realized that the most powerful technology is <span className="highlight-text font-semibold text-heading">deeply human</span>. To me, it’s not just about code or algorithms. It’s about <span className="highlight-text font-semibold text-heading">why and how people using them</span> and the complex problems we try to solve.
