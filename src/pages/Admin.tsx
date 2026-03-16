@@ -521,11 +521,9 @@ const Admin = () => {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="UI/UX Design">UI/UX Design</SelectItem>
-                    <SelectItem value="Graphic Design">
-                      Graphic Design
-                    </SelectItem>
-                    <SelectItem value="AI Tools">AI Tools</SelectItem>
+                    <SelectItem value="Product & UI/UX Design">Product & UI/UX Design</SelectItem>
+                    <SelectItem value="Visual Identity & Branding">Visual Identity & Branding</SelectItem>
+                    <SelectItem value="AI Engineering & Agents">AI Engineering & Agents</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
