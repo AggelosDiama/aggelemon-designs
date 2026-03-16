@@ -24,12 +24,13 @@ export const Hero = () => {
                 I'm Aggelos, you can call me <span className="highlight-heading">Lemon</span>
               </h1>
               <h2 className="text-2xl md:text-3xl font-semibold text-heading">
-                <span className="highlight-heading">Architecting Intelligent Products: Where AI Engineering meets UX.</span>
+                <span className="highlight-heading">Making Intelligent Products: Where AI Engineering meets UX.</span>
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
                 I was always the 'tech guy' with a Computer Engineering background , but I’ve realized that the most powerful technology is <span className="highlight-text font-semibold text-heading">deeply human</span>. To me, it’s not just about writing code or optimizing algorithms. It’s about <span className="highlight-text font-semibold text-heading">why and how people using them</span> and the complex problems we try to solve.
+                <br></br>
 
-                Whether I’m designing a UI or developing an AI agent, I’m driven to find smarter ways to make things work. I believe AI adds a transformative layer to this, moving beyond simple prompts to creating RAG-based systems and LLM orchestrations that actually understand user needs.
+                Whether I’m designing a UI or developing an AI agent, I’m driven to find smarter ways to make things work. I believe AI adds a transformative layer to this, moving beyond simple prompts to creating RAG-based systems and LLM orchestrations<span className="highlight-text font-semibold text-heading">that actually understand user needs.</span>
 
                 Right now, I’m building production-ready AI tools and collaborating with people who share the same drive to create, solve, and innovate at the intersection of intelligence and design.
               </p>
