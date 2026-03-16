@@ -123,7 +123,7 @@ const Admin = () => {
     setYear(new Date().getFullYear());
     setShortDescription("");
     setFullContent("");
-    setCategory("UI/UX Design");
+    setCategory("Product & UI/UX Design");
     setFeatured(false);
     setImageUrl("");
     setImageFile(null);
