@@ -192,7 +192,7 @@ export const AboutPageContent = () => {
           </div>
 
           {/* Lemon Facts */}
-          <div id="lemon-facts" className="scroll-mt-24">
+          <div>
             <h3 className="text-2xl font-bold text-heading mb-4">
               🍋 <span className="highlight-heading">Lemon</span> Facts
             </h3>

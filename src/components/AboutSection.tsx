@@ -49,10 +49,12 @@ export const AboutSection = () => {
                 <span className="highlight-text font-semibold text-heading">UX Specialist</span> building the next generation of AI products. 
                 I don't just design interfaces. I develop the intelligent systems behind them. My goal is to 
                 <span className="highlight-text font-semibold text-heading">bridge the gap</span> between complex engineering 
-                and seamless user experiences.  <span className="highlight-text font-semibold text-heading">
-                  <a href="https://aggelemon-designs.lovable.app/about" target="_blank">
-                    Learn more about my background and experience here.
-                  </a>
+                and seamless user experiences.{" "}
+                <span
+                  className="highlight-text font-semibold text-heading cursor-pointer hover:underline"
+                  onClick={() => navigate("/about")}
+                >
+                  Learn more about my background and experience here.
                 </span>
               </p>
             </div>
