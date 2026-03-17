@@ -43,9 +43,7 @@ export const AboutSection = () => {
             {/* Top Left: Opening Snapshot */}
             <div>
               <p className="text-lg text-foreground leading-relaxed">
-                I’m Aggelos, a <span className="highlight-text font-semibold text-heading">Computer Engineer</span> and <span className="highlight-text font-semibold text-heading">UX Specialist</span> building the next generation of AI products. 
-              <br></br>
-              I don't just design interfaces. I develop the intelligent systems behind them. My goal is to <span className="highlight-text font-semibold text-heading">bridge the gap</span> between complex engineering and seamless user experiences.
+                I’m Aggelos, a <span className="highlight-text font-semibold text-heading">Computer Engineer</span> and <span className="highlight-text font-semibold text-heading">UX Specialist</span> building the next generation of AI products. I don't just design interfaces. I develop the intelligent systems behind them. My goal is to <span className="highlight-text font-semibold text-heading">bridge the gap</span> between complex engineering and seamless user experiences.
               </p>
             </div>
 

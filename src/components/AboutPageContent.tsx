@@ -68,9 +68,9 @@ export const AboutPageContent = () => {
               <br></br>
               <h4 className="text-2xl font-bold text-heading mb-4">The AI Breakthrough</h4>
               <p className="text-foreground leading-relaxed">
-                When ChatGPT launched, it changed the trajectory of my work. I was already developing a Master’s Thesis on educational technology, but the leap in Large Language Models allowed me to pivot toward a more ambitious goal. I built an AI Tutor Platform designed to provide students with personalized, real-time feedback on programming assignments. 
+                When ChatGPT launched, it changed the trajectory of my work. I was already developing a RAG agent for my thesis, but the leap in Large Language Models allowed me to <span className="highlight-text font-semibold text-heading">pivot toward a more ambitious goal</span>. I built an AI Tutor Platform designed to provide students with personalized, real-time feedback on programming assignments. 
                 <br></br>
-                Instead of just building a basic interface, I focused on the "intelligence" layer. I engineered specific prompt structures to handle student implementation errors and identified the technical limitations of the models through hands-on testing. To make sure the platform actually worked in a real-world setting, I conducted usability testing with university students to validate my design assumptions and refine how the AI communicated complex coding concepts. <span className="highlight-text font-semibold text-heading">This is where I first merged my engineering background with my UX skills to create a product that was not only functional but also genuinely helpful for users.</span>
+                To make sure the platform actually worked in a real-world setting, I conducted usability testing with university students to validate my design assumptions and refine how the AI communicated complex coding concepts. <span className="highlight-text font-semibold text-heading">This is where I first merged my engineering background with my UX skills to create a product that was not only functional but also genuinely helpful for users.</span>
               </p>
               <br></br>
               <h4 className="text-2xl font-bold text-heading mb-4">Finding My Niche</h4>
@@ -106,7 +106,7 @@ export const AboutPageContent = () => {
             <br></br>
             <h4 className="text-2xl font-bold text-heading mb-4">Visual and Functional Iteration</h4>
             <p className="text-foreground leading-relaxed">
-              I iterate based on how the product feels in a user's hands. This means I don't just "fix the code". I constantly refine the prompts and the typography.<span className="highlight-text font-semibold text-heading"> I focus on how the information is presented, ensuring that even the most complex AI-generated data is easy to read and intuitive to navigate.</span>
+              I iterate based on how the product feels in a user's hands. This means I don't just "fix the code". I constantly refine the prompts and the typography. I focus on <span className="highlight-text font-semibold text-heading">how the information is presented, ensuring that even the most complex AI-generated data is easy to read.</span> 
             </p>
           </div>
 
