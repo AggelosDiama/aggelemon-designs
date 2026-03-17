@@ -1,5 +1,7 @@
 import profilePhoto from "@/assets/portfolio-pic-2.png";
 import { ChevronDown } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 export const Hero = () => {
   return (
