@@ -32,6 +32,7 @@ const lemonFacts = [
 ];
 
 export const AboutSection = () => {
+  const navigate = useNavigate();
   return (
     <section className="py-20 px-4 animate-fade-in">
       <div className="max-w-6xl mx-auto">
