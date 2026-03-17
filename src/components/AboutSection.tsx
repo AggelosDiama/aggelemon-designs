@@ -1,4 +1,5 @@
 import cvQRCode from "@/assets/cv-qr-code.png";
+import { useNavigate } from "react-router-dom";
 
 const designSkills = [
   "UI/UX Design",
