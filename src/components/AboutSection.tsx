@@ -1,6 +1,4 @@
 import cvQRCode from "@/assets/cv-qr-code.png";
-import { useNavigate } from "react-router-dom";
-const navigate = useNavigate();
 
 const designSkills = [
   "UI/UX Design",
@@ -49,9 +47,11 @@ export const AboutSection = () => {
                 <span className="highlight-text font-semibold text-heading">UX Specialist</span> building the next generation of AI products. 
                 I don't just design interfaces. I develop the intelligent systems behind them. My goal is to 
                 <span className="highlight-text font-semibold text-heading">bridge the gap</span> between complex engineering 
-                and seamless user experiences. Learn more about my background and experience <span
-                className="highlight-text font-semibold text-heading cursor-pointer"
-                onClick={() => navigate("/about")}> here.</span>
+                and seamless user experiences.  <span className="highlight-text font-semibold text-heading">
+                  <a href="https://aggelemon-designs.lovable.app/about" target="_blank">
+                    Learn more about my background and experience here.
+                  </a>
+                </span>
               </p>
             </div>
 
