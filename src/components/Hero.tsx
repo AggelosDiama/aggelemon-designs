@@ -36,24 +36,27 @@ export const Hero = () => {
                 <br></br>
                 Whether I’m building a UI or an AI agent, I’m driven to find smarter ways to <span className="highlight-text font-semibold text-heading">bridge the gap between user needs and technical possibility.</span>
               </p>
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl pt-2">
-                Get in touch with me by connecting on{" "}
-                <a 
-                  href="https://www.linkedin.com/in/aggelos-diamantopoulos/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="highlight-link font-bold text-heading"
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <Button 
+                  className="bg-lemon hover:bg-lemon/90 text-white font-bold text-base px-6 py-3 h-auto"
+                  onClick={() => navigate("/ai-engineering")}
                 >
-                  LinkedIn
-                </a>
-                {" "}or email me at{" "}
-                <a 
-                  href="mailto:aggelosdiama@gmail.com"
-                  className="highlight-link font-bold text-heading"
+                  View my AI Projects
+                </Button>
+                <Button 
+                  variant="ghost"
+                  className="text-base font-semibold px-6 py-3 h-auto border border-border hover:text-lemon"
+                  asChild
                 >
-                  aggelosdiama@gmail.com
-                </a>
-              </p>
+                  <a 
+                    href="https://www.linkedin.com/in/aggelos-diamantopoulos/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Let's Connect on LinkedIn
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
