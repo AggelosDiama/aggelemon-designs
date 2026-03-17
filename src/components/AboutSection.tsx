@@ -43,17 +43,9 @@ export const AboutSection = () => {
             {/* Top Left: Opening Snapshot */}
             <div>
               <p className="text-lg text-foreground leading-relaxed">
-                I see design as a way to solve real problems, not just to create
-                and impress. My style{" "}
-                <span className="highlight-text font-semibold text-heading">
-                  leans toward minimalism
-                </span>
-                , but every project starts with{" "}
-                <span className="highlight-text font-semibold text-heading">
-                  questions, research, and curiosity
-                </span>
-                . I treat each challenge as a chance to think differently, even
-                when it means stepping outside my comfort zone.
+                I’m Aggelos, a <span className="highlight-text font-semibold text-heading">Computer Engineer</span> and <span className="highlight-text font-semibold text-heading">UX Specialist</span> building the next generation of AI products. 
+              <br></br>
+              I don't just design interfaces. I develop the intelligent systems behind them. My goal is to <span className="highlight-text font-semibold text-heading">bridge the gap</span> between complex engineering and seamless user experiences.
               </p>
             </div>
 

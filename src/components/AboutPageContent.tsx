@@ -49,7 +49,9 @@ export const AboutPageContent = () => {
               <span className="text-2xl font-bold text-heading">Hello!</span>
             </p>
             <p className="text-lg text-foreground leading-relaxed mt-4">
-              I see design as a way to <span className="highlight-text font-semibold text-heading">solve real problems</span>, not just to create and impress. My style <span className="highlight-text font-semibold text-heading">leans toward minimalism</span>, but every project starts with <span className="highlight-text font-semibold text-heading">questions, research, and curiosity</span>. I treat each challenge as a chance to <span className="highlight-text font-semibold text-heading">think differently</span>, even when it means stepping outside my comfort zone.
+              I’m Aggelos, a <span className="highlight-text font-semibold text-heading">Computer Engineer</span> and <span className="highlight-text font-semibold text-heading">UX Specialist</span> building the next generation of AI products. 
+              <br></br>
+              I don't just design interfaces. I develop the intelligent systems behind them. My goal is to <span className="highlight-text font-semibold text-heading">bridge the gap</span> between complex engineering and seamless user experiences.
             </p>
           </div>
 
@@ -59,8 +61,21 @@ export const AboutPageContent = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
             <div className="lg:col-span-2">
               <h3 className="text-2xl font-bold text-heading mb-4">Professional Story</h3>
+              <h4 className="text-2xl font-bold text-heading mb-4">The Engineering Foundation</h4>
               <p className="text-foreground leading-relaxed">
-                I was always the <span className="highlight-text font-semibold text-heading">"tech guy"</span> in my circles, so studying computer engineering felt like the obvious path. During university, I joined <span className="highlight-text font-semibold text-heading">EESTEC</span>, a European organization for Electrical and Computer Engineers, and discovered their Graphic Design team. That's where <span className="highlight-text font-semibold text-heading">design first clicked</span> for me. I moved from small visual tasks to <span className="highlight-text font-semibold text-heading">leading the team</span>, designing the annual magazine, and mentoring new designers. Freelance projects followed, giving me space to explore creativity through real challenges. To connect my technical background with that creative drive, I began focusing on <span className="highlight-text font-semibold text-heading">UI/UX design</span>, taking on projects and specialized courses to refine my skills.
+                My journey started at the University of Patras where I studied Computer Engineering. <span className="highlight-text font-semibold text-heading">I loved the logic of code, but there I also discovered a passion for design.</span> I was always curious about how people actually interact with technology. This led me to master UI/UX design through various online programs, such as the Google Professional Certificate program. <span className="highlight-text font-semibold text-heading">I wanted to merge technical power with visual clarity.</span>
+              </p>
+              <br></br>
+              <h4 className="text-2xl font-bold text-heading mb-4">The AI Breakthrough</h4>
+              <p className="text-foreground leading-relaxed">
+                When ChatGPT launched, it changed the trajectory of my work. I was already developing a Master’s Thesis on educational technology, but the leap in Large Language Models allowed me to pivot toward a more ambitious goal. I built an AI Tutor Platform designed to provide students with personalized, real-time feedback on programming assignments. 
+                <br></br>
+                Instead of just building a basic interface, I focused on the "intelligence" layer. I engineered specific prompt structures to handle student implementation errors and identified the technical limitations of the models through hands-on testing. To make sure the platform actually worked in a real-world setting, I conducted usability testing with university students to validate my design assumptions and refine how the AI communicated complex coding concepts. <span className="highlight-text font-semibold text-heading">This is where I first merged my engineering background with my UX skills to create a product that was not only functional but also genuinely helpful for users.</span>
+              </p>
+              <br></br>
+              <h4 className="text-2xl font-bold text-heading mb-4">Finding My Niche</h4>
+              <p className="text-foreground leading-relaxed">
+                As AI started <span className="highlight-text font-semibold text-heading">changing traditional UI/UX</span>, I saw a chance to return to my engineering roots. I joined Accenture's AI Engineering Academy to sharpen my skills in LLM orchestration, building agents and vector databases. <span className="highlight-text font-semibold text-heading">Today, I use my engineering background to build robust agents and my UX foundation to make sure they are actually easy for people to use.</span>
               </p>
             </div>
             <div className="flex flex-col items-center justify-center p-6 rounded-lg bg-card border border-border">
@@ -71,11 +86,27 @@ export const AboutPageContent = () => {
 
           <Separator className="my-12" />
 
-          {/* Design Philosophy */}
+          {/* My Approach */}
           <div>
-            <h3 className="text-2xl font-bold text-heading mb-4">Design Philosophy</h3>
+            <h3 className="text-2xl font-bold text-heading mb-4">My Approach</h3>
+            <h4 className="text-2xl font-bold text-heading mb-4">Requirements-Driven Architecture</h4>
             <p className="text-foreground leading-relaxed">
-              I design with the <span className="highlight-text font-semibold text-heading">user's experience front and center</span>. Every decision aims to make <span className="highlight-text font-semibold text-heading">information clear</span> and <span className="highlight-text font-semibold text-heading">tasks easy to complete</span>. I'm proactive with new challenges, asking questions and seeking input to find the best solutions. <span className="highlight-text font-semibold text-heading">Negative space</span> is core to my approach; I believe <span className="highlight-text font-semibold text-heading">simplicity helps users focus</span>, making each design both functional and easy on the eyes.
+              Every project starts with a conversation. I first identify the client’s resources and constraints, then <span className="highlight-text font-semibold text-heading">ask the right questions</span> to translate their vision into technical requirements. These requirements define the entire architecture, ensuring I choose the right technologies, whether it’s a simple script or a complex agentic workflow.
+            </p>
+            <br></br>
+            <h4 className="text-2xl font-bold text-heading mb-4">Scalable Complexity</h4>
+            <p className="text-foreground leading-relaxed">
+              I believe the technology should match the need. If a project requires a simple interaction, <span className="highlight-text font-semibold text-heading">I keep it lightweight with a focused UI and precise prompting</span>. As the user’s needs become more complex, I scale the solution, moving into custom JavaScript and more sophisticated logic to ensure the interface remains clear and the output remains powerful.
+            </p>
+            <br></br>
+            <h4 className="text-2xl font-bold text-heading mb-4">The Feedback Loop</h4>
+            <p className="text-foreground leading-relaxed">
+              <span className="highlight-text font-semibold text-heading">I build systems that learn.</span> My goal is to create products where the user can rate or critique the AI’s performance. This feedback loop allows the system to refine its logic and build better, more accurate responses over time, turning a static tool into an evolving assistant.
+            </p>
+            <br></br>
+            <h4 className="text-2xl font-bold text-heading mb-4">Visual and Functional Iteration</h4>
+            <p className="text-foreground leading-relaxed">
+              I iterate based on how the product feels in a user's hands. This means I don't just "fix the code". I constantly refine the prompts and the typography.<span className="highlight-text font-semibold text-heading"> I focus on how the information is presented, ensuring that even the most complex AI-generated data is easy to read and intuitive to navigate.</span>
             </p>
           </div>
 
