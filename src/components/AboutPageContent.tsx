@@ -61,8 +61,7 @@ export const aboutSections = [
   { id: "professional-story", label: "Professional Story" },
   { id: "my-approach", label: "My Approach" },
   { id: "education-training", label: "Education & Training" },
-  { id: "skills-tools", label: "Skills & Tools" },
-  { id: "lemon-facts", label: "Lemon Facts" },
+  { id: "skills-and-facts", label: "Skills & Lemon Facts" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -166,9 +165,9 @@ export const AboutPageContent = () => {
         <Separator className="my-12" />
 
         {/* Skills & Lemon Facts Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div id="skills-and-facts" className="scroll-mt-24 grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Skills & Tools as Chips */}
-          <div id="skills-tools" className="scroll-mt-24">
+          <div>
             <h3 className="text-2xl font-bold text-heading mb-4">Skills & Tools</h3>
             <div className="flex flex-wrap gap-2 mb-4">
               {designSkills.map((skill) => (
@@ -193,7 +192,7 @@ export const AboutPageContent = () => {
           </div>
 
           {/* Lemon Facts */}
-          <div id="lemon-facts" className="scroll-mt-24">
+          <div>
             <h3 className="text-2xl font-bold text-heading mb-4">
               🍋 <span className="highlight-heading">Lemon</span> Facts
             </h3>
