@@ -4,7 +4,8 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Bot, Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Bot, Sparkles, Github } from "lucide-react";
 
 interface Project {
   title: string;
