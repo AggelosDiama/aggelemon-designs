@@ -30,9 +30,9 @@ const About = () => {
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
-      // const yOffset = -10; // Offset in pixels (e.g., 24px higher)
-      // const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({behavior: "smooth" });
+      const yOffset = -10; // Offset in pixels (e.g., 24px higher)
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
 
