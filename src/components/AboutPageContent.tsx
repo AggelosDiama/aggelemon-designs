@@ -115,8 +115,18 @@ export const AboutPageContent = () => {
             </div>
             <div className="flex flex-col items-center justify-center p-6 rounded-lg bg-card border border-border">
               <img src={cvQRCode} alt="CV QR Code" className="w-48 h-48 mb-3" />
-              <p className="text-sm text-muted-foreground text-center">Scan QR for my CV</p>
-            </div>
+              <p className="text-sm text-muted-foreground text-center">
+                Scan QR for my CV
+              </p>
+              <p className="text-sm text-muted-foreground text-center">
+                or you can{" "}
+                <span className="highlight-text font-semibold text-heading">
+                  <a href="https://linkly.link/2KW66" target="_blank">
+                    click here!
+                  </a>
+                </span>
+              </p>
+              </div>
           </div>
         </div>
 
