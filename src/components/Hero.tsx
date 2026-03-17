@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 export const Hero = () => {
+  const navigate = useNavigate();
   return (
     <section className="min-h-screen flex flex-col items-center justify-center px-4 py-20 animate-fade-in relative">
       <div className="max-w-7xl w-full flex-1 flex items-center">
