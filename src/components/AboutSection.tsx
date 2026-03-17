@@ -49,12 +49,10 @@ export const AboutSection = () => {
                 <span className="highlight-text font-semibold text-heading">UX Specialist</span> building the next generation of AI products. 
                 I don't just design interfaces. I develop the intelligent systems behind them. My goal is to 
                 <span className="highlight-text font-semibold text-heading">bridge the gap</span> between complex engineering 
-                and seamless user experiences.{" "}
+                and seamless user experiences. Learn more about my background and experience{" "}
                 <span
                   className="highlight-text font-semibold text-heading cursor-pointer hover:underline"
-                  onClick={() => navigate("/about")}
-                >
-                  Learn more about my background and experience here.
+                  onClick={() => navigate("/about")}> here.
                 </span>
               </p>
             </div>
