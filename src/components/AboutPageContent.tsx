@@ -61,8 +61,7 @@ export const aboutSections = [
   { id: "professional-story", label: "Professional Story" },
   { id: "my-approach", label: "My Approach" },
   { id: "education-training", label: "Education & Training" },
-  { id: "skills-tools", label: "Skills & Tools" },
-  { id: "lemon-facts", label: "Lemon Facts" },
+  { id: "skills-and-facts", label: "Skills & Lemon Facts" },
   { id: "contact", label: "Contact" },
 ];
 
