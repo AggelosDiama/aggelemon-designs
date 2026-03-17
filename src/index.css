@@ -90,6 +90,10 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  #lovable-badge {
+    display: none !important;
+  }
+
   html {
     scroll-behavior: smooth;
   }
