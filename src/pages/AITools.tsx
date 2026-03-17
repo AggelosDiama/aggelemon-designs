@@ -4,7 +4,8 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Bot, Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Bot, Sparkles, Github } from "lucide-react";
 
 interface Project {
   title: string;
@@ -78,9 +79,22 @@ const AITools = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-heading text-center mb-4">
             AI Engineering & Agents
           </h1>
-          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+          <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
             Building intelligent systems, AI-powered tools, and autonomous agents that solve real problems.
           </p>
+          <div className="flex items-center justify-center gap-4 mb-12 p-6 rounded-lg bg-card border border-border">
+            <div className="text-center space-y-3">
+              <p className="text-muted-foreground">
+                Explore my code, experiments, and open-source contributions on GitHub.
+              </p>
+              <Button asChild className="bg-lemon hover:bg-lemon/90 text-white font-bold">
+                <a href="https://github.com/AggelosDiama" target="_blank" rel="noopener noreferrer">
+                  <Github className="w-4 h-4" />
+                  My GitHub
+                </a>
+              </Button>
+            </div>
+          </div>
           {projects.length === 0 ? (
             <div className="text-center py-20 space-y-6">
               <div className="flex justify-center gap-4">
