@@ -36,7 +36,7 @@ export const Header = () => {
                       e.preventDefault();
                       document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                     }}
-                    className="bg-lemon hover:bg-lemon/90 text-grey font-bold"
+                    className="bg-lemon hover:bg-lemon/90 text-heading font-bold"
                   >
                     {link.name}
                   </Button>

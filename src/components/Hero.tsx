@@ -38,7 +38,7 @@ export const Hero = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button 
-                  className="bg-lemon hover:bg-lemon/90 text-white font-bold text-base px-6 py-3 h-auto"
+                  className="bg-lemon hover:bg-lemon/90 text-heading font-bold text-base px-6 py-3 h-auto"
                   onClick={() => navigate("/ai-engineering")}
                 >
                   View my AI Projects
