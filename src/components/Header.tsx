@@ -27,43 +27,26 @@ export const Header = () => {
           </NavLink>
 
           <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => {
-              if (link.path === "#contact") {
-                return (
-                  <Button
-                    key={link.path}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                    }}
-                    className="bg-lemon hover:bg-lemon/90 text-heading font-bold"
-                  >
-                    {link.name}
-                  </Button>
-                );
-              }
-              
-              return (
-                <NavLink
-                  key={link.path}
-                  to={link.path}
-                  className={({ isActive }) =>
-                    cn(
-                      "text-base font-medium transition-all duration-200 relative",
-                      "hover:text-lemon",
-                      "after:content-[''] after:absolute after:w-full after:h-0.5 after:bottom-0 after:left-0",
-                      "after:bg-lemon after:origin-bottom-right after:transition-transform after:duration-300",
-                      "after:scale-x-0 hover:after:scale-x-100 hover:after:origin-bottom-left",
-                      isActive
-                        ? "text-lemon after:scale-x-100"
-                        : "text-muted-foreground"
-                    )
-                  }
-                >
-                  {link.name}
-                </NavLink>
-              );
-            })}
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.path}
+                to={link.path}
+                className={({ isActive }) =>
+                  cn(
+                    "text-base font-medium transition-all duration-200 relative",
+                    "hover:text-lemon",
+                    "after:content-[''] after:absolute after:w-full after:h-0.5 after:bottom-0 after:left-0",
+                    "after:bg-lemon after:origin-bottom-right after:transition-transform after:duration-300",
+                    "after:scale-x-0 hover:after:scale-x-100 hover:after:origin-bottom-left",
+                    isActive
+                      ? "text-lemon after:scale-x-100"
+                      : "text-muted-foreground"
+                  )
+                }
+              >
+                {link.name}
+              </NavLink>
+            ))}
           </nav>
 
           <button
