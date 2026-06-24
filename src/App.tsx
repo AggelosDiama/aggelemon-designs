@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { PageTransition } from "@/components/PageTransition";
+import { ChatWidget } from "@/components/ChatWidget";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ProjectDetail from "./pages/ProjectDetail";
@@ -40,6 +41,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </PageTransition>
+        <ChatWidget />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
