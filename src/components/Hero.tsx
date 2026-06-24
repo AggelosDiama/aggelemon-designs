@@ -72,15 +72,11 @@ export const Hero = () => {
             <Button
               variant="ghost"
               className="text-sm font-semibold px-5 py-2.5 h-auto border border-border hover:text-lemon w-full"
-              asChild
+              onClick={() =>
+                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
+              }
             >
-              <a
-                href="https://www.linkedin.com/in/aggelos-diamantopoulos/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Let's Connect on LinkedIn
-              </a>
+              Let's Connect
             </Button>
           </div>
         </aside>
