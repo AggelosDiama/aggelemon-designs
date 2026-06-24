@@ -59,41 +59,23 @@ export const Header = () => {
 
         {mobileMenuOpen && (
           <nav className="md:hidden py-4 space-y-4 animate-fade-in">
-            {navLinks.map((link) => {
-              if (link.path === "#contact") {
-                return (
-                  <button
-                    key={link.path}
-                    onClick={(e) => {
-                      setMobileMenuOpen(false);
-                      e.preventDefault();
-                      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                    }}
-                    className="block w-full text-left px-4 py-2 text-base font-medium transition-colors rounded-md text-muted-foreground hover:bg-muted hover:text-lemon"
-                  >
-                    {link.name}
-                  </button>
-                );
-              }
-              
-              return (
-                <NavLink
-                  key={link.path}
-                  to={link.path}
-                  className={({ isActive }) =>
-                    cn(
-                      "block px-4 py-2 text-base font-medium transition-colors rounded-md",
-                      isActive
-                        ? "bg-lemon/10 text-lemon"
-                        : "text-muted-foreground hover:bg-muted hover:text-lemon"
-                    )
-                  }
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </NavLink>
-              );
-            })}
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.path}
+                to={link.path}
+                className={({ isActive }) =>
+                  cn(
+                    "block px-4 py-2 text-base font-medium transition-colors rounded-md",
+                    isActive
+                      ? "bg-lemon/10 text-lemon"
+                      : "text-muted-foreground hover:bg-muted hover:text-lemon"
+                  )
+                }
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.name}
+              </NavLink>
+            ))}
           </nav>
         )}
       </div>
