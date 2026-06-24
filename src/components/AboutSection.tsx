@@ -116,8 +116,18 @@ export const AboutSection = () => {
               </div>
             </div>
           </div>
+
+          <div className="flex justify-center mt-10">
+            <button
+              onClick={() => navigate("/about")}
+              className="text-base font-semibold px-6 py-3 rounded-md border border-border text-heading hover:text-lemon hover:border-lemon transition-colors"
+            >
+              Read More
+            </button>
+          </div>
         </div>
       </div>
     </section>
   );
 };
+
