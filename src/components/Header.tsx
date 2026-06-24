@@ -20,9 +20,10 @@ export const Header = () => {
         <div className="flex h-16 items-center justify-between">
           <NavLink 
             to="/" 
-            className="text-2xl font-bold text-heading hover:text-lemon transition-colors"
+            className="flex flex-col leading-none hover:text-lemon transition-colors"
           >
-            Lemon 🍋
+            <span className="text-2xl font-bold text-heading">Lemon 🍋</span>
+            <span className="text-xs font-medium text-muted-foreground tracking-wide">Aggelos Diamantopoulos</span>
           </NavLink>
 
           <nav className="hidden md:flex items-center gap-8">
