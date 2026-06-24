@@ -9,7 +9,6 @@ const navLinks = [
   { name: "Product & UI/UX", path: "/product-uiux" },
   { name: "Visual Identity & Branding", path: "/visual-identity" },
   { name: "About Me", path: "/about" },
-  { name: "Contact", path: "#contact" },
 ];
 
 export const Header = () => {
