@@ -41,6 +41,24 @@ export const Footer = () => {
                 </p>
               </div>
             </a>
+
+            <a
+              href="https://linkly.link/2KW66"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-4 px-6 py-4 rounded-lg bg-card border border-border hover:border-lemon hover:shadow-lg transition-all duration-300"
+              aria-label="Resume"
+            >
+              <FileText className="w-8 h-8 text-heading group-hover:text-lemon transition-colors shrink-0" />
+              <div className="text-left">
+                <p className="text-xs uppercase tracking-wider text-muted-foreground group-hover:text-lemon transition-colors">
+                  Resume
+                </p>
+                <p className="text-lg font-bold text-heading group-hover:translate-x-1 transition-transform">
+                  See my CV
+                </p>
+              </div>
+            </a>
           </div>
 
           <p className="text-sm text-muted-foreground pt-4">
