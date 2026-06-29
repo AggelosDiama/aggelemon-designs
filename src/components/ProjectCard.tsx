@@ -10,7 +10,6 @@ interface ProjectCardProps {
   short_description: string;
   category?: string;
   showCategory?: boolean;
-  compact?: boolean;
 }
 
 export const ProjectCard = ({
@@ -21,54 +20,61 @@ export const ProjectCard = ({
   short_description,
   category,
   showCategory = false,
-  compact = false,
 }: ProjectCardProps) => {
   return (
-    <Link to={`/projects/${slug}`} className="block h-full">
-      <div className="bg-card rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
-        {/* Project Image */}
-        <div className="aspect-video overflow-hidden bg-muted relative">
-          <LazyImage
-            src={image}
-            alt={title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            skeletonClassName="w-full h-full"
-          />
-          {showCategory && category && (
-            <span className={`absolute top-3 right-3 ${compact ? "px-2.5 py-1 text-[10px]" : "px-4 py-2 text-xs"} font-semibold rounded-full bg-primary text-primary-foreground`}>
-              {category}
+    <div className="bg-card rounded-2xl overflow-hidden border border-border hover:shadow-lg hover:border-lemon/30 transition-all duration-300 flex flex-col sm:flex-row gap-4 sm:gap-5 p-4 sm:p-5">
+      {/* Project Image */}
+      <div className="sm:w-52 md:w-60 shrink-0 aspect-video sm:aspect-[4/3] overflow-hidden rounded-xl bg-muted">
+        <LazyImage
+          src={image}
+          alt={title}
+          className="w-full h-full object-cover"
+          skeletonClassName="w-full h-full"
+        />
+      </div>
+
+      {/* Project Info */}
+      <div className="flex-1 flex flex-col py-1">
+        <Link
+          to={`/projects/${slug}`}
+          className="group/title self-start"
+        >
+          <h3 className="text-xl md:text-2xl font-bold text-heading leading-tight group-hover/title:underline underline-offset-4 decoration-2 decoration-lemon transition-all">
+            {title}
+          </h3>
+        </Link>
+
+        {showCategory && category && (
+          <span className="inline-flex self-start mt-2.5 px-4 py-1.5 text-sm font-semibold rounded-full bg-primary text-primary-foreground">
+            {category}
+          </span>
+        )}
+
+        <div className="flex flex-wrap gap-2 mt-3">
+          {tags.slice(0, 4).map((tag) => (
+            <span
+              key={tag}
+              className="px-3 py-1 text-sm rounded-full bg-muted text-foreground font-mono"
+            >
+              {tag}
             </span>
-          )}
+          ))}
         </div>
 
-        {/* Project Info */}
-        <div className={`${compact ? "p-4" : "p-6"} flex-1 flex flex-col`}>
-          <div className="flex items-center justify-between mb-2">
-            <h3 className={`${compact ? "text-lg" : "text-2xl"} font-bold text-heading group-hover:text-lemon transition-colors`}>
-              {title}
-            </h3>
-            {!compact && (
-              <ArrowRight className="w-6 h-6 text-lemon group-hover:translate-x-2 transition-transform" />
-            )}
-          </div>
-          <div className="flex flex-wrap gap-1.5 mb-3">
-            {tags.slice(0, 3).map((tag) => (
-              <span
-                key={tag}
-                className={`${compact ? "px-2 py-0.5 text-xs" : "px-3 py-1 text-sm"} rounded-full bg-muted text-foreground`}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          <p className={`${compact ? "text-xs" : "text-sm"} text-muted-foreground flex-1`}>{short_description}</p>
-          <div className="mt-3">
-            <span className="highlight-link inline-block text-sm font-semibold text-heading">
-              View
-            </span>
-          </div>
+        <p className="text-sm text-muted-foreground leading-relaxed mt-3 flex-1">
+          {short_description}
+        </p>
+
+        <div className="mt-4">
+          <Link
+            to={`/projects/${slug}`}
+            className="view-project-link group/vpl inline-flex items-center gap-1.5 text-sm font-semibold text-heading"
+          >
+            View Project
+            <ArrowRight className="w-4 h-4 transition-transform group-hover/vpl:translate-x-1" />
+          </Link>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
