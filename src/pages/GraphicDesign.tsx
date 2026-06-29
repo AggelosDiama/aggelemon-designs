@@ -93,12 +93,12 @@ const GraphicDesign = () => {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-5">
               {projects.map((project, index) => (
                 <div
                   key={project.slug}
                   className="animate-fade-in-up"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  style={{ animationDelay: `${index * 0.08}s` }}
                 >
                   <ProjectCard {...project} image={project.image_url} short_description={project.short_description} />
                 </div>
