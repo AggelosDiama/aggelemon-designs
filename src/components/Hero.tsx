@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import profilePhoto from "@/assets/portfolio-pic-2.png";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
-import { LazyImage } from "@/components/LazyImage";
+import { ProjectCard } from "@/components/ProjectCard";
 
 interface FeaturedProject {
   title: string;
@@ -100,53 +100,21 @@ export const Hero = () => {
             </div>
           ) : (
             projects.map((project, index) => (
-              <Link
-                to={`/projects/${project.slug}`}
+              <div
                 key={project.slug}
-                className="group block bg-card rounded-2xl overflow-hidden border border-border hover:shadow-xl hover:border-lemon/40 transition-all duration-300 animate-fade-in-up"
+                className="animate-fade-in-up"
                 style={{ animationDelay: `${index * 0.08}s` }}
               >
-                <div className="flex flex-col sm:flex-row gap-0 sm:gap-5 p-4">
-                  <div className="sm:w-56 md:w-64 shrink-0 aspect-video sm:aspect-[4/3] overflow-hidden rounded-xl bg-muted">
-                    <LazyImage
-                      src={project.image_url}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      skeletonClassName="w-full h-full"
-                    />
-                  </div>
-                  <div className="flex-1 flex flex-col py-2 sm:py-1">
-                    <div className="flex items-start justify-between gap-3 mb-2">
-                      <h3 className="text-xl md:text-2xl font-bold text-heading group-hover:text-lemon transition-colors leading-tight">
-                        {project.title}
-                      </h3>
-                      {project.category && (
-                        <span className="shrink-0 px-2.5 py-1 text-[10px] font-semibold rounded-full bg-primary text-primary-foreground uppercase tracking-wide">
-                          {project.category}
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex flex-wrap gap-1.5 mb-2">
-                      {project.tags.slice(0, 4).map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-0.5 text-xs rounded-full bg-muted text-foreground font-mono"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed flex-1">
-                      {project.short_description}
-                    </p>
-                    <div className="mt-3">
-                      <span className="highlight-link inline-block text-sm font-semibold text-heading">
-                        View
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
+                <ProjectCard
+                  title={project.title}
+                  tags={project.tags}
+                  slug={project.slug}
+                  image={project.image_url}
+                  short_description={project.short_description}
+                  category={project.category}
+                  showCategory={true}
+                />
+              </div>
             ))
           )}
         </div>
