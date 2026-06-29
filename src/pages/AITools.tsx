@@ -47,19 +47,18 @@ const AITools = () => {
           <div className="max-w-6xl mx-auto">
             <Skeleton className="h-12 w-80 mx-auto mb-4" />
             <Skeleton className="h-6 w-96 mx-auto mb-12" />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="bg-card rounded-lg overflow-hidden shadow-sm">
-                  <Skeleton className="aspect-video w-full" />
-                  <div className="p-6 space-y-4">
-                    <Skeleton className="h-8 w-3/4" />
+            <div className="space-y-5">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="bg-card rounded-2xl p-4 sm:p-5 flex gap-4 sm:gap-5 border border-border">
+                  <Skeleton className="w-48 h-32 sm:w-52 md:w-60 shrink-0 rounded-xl" />
+                  <div className="flex-1 space-y-3 py-1">
+                    <Skeleton className="h-6 w-2/3" />
                     <div className="flex gap-2">
-                      <Skeleton className="h-6 w-20" />
-                      <Skeleton className="h-6 w-20" />
-                      <Skeleton className="h-6 w-20" />
+                      <Skeleton className="h-5 w-16 rounded-full" />
+                      <Skeleton className="h-5 w-16 rounded-full" />
                     </div>
                     <Skeleton className="h-4 w-full" />
-                    <Skeleton className="h-4 w-2/3" />
+                    <Skeleton className="h-4 w-1/2" />
                   </div>
                 </div>
               ))}
