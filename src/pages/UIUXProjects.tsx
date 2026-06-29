@@ -76,7 +76,7 @@ const UIUXProjects = () => {
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold text-heading text-center mb-4">
-            Product & UI/UX Design
+            Product & UI/UX
           </h1>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
             User-centered digital experiences built on research, empathy, and seamless interactions.

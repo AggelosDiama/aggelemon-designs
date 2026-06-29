@@ -77,7 +77,7 @@ const AITools = () => {
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold text-heading text-center mb-4">
-            AI Engineering & Agents
+            AI Engineering
           </h1>
           <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
             Building intelligent systems, AI-powered tools, and autonomous agents that solve real problems.

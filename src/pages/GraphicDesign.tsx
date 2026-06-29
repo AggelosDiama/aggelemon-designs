@@ -76,7 +76,7 @@ const GraphicDesign = () => {
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold text-heading text-center mb-4">
-            Visual Identity & Branding
+            Visual & Branding
           </h1>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
             Bold visual storytelling through branding, identity systems, and creative design leadership.
