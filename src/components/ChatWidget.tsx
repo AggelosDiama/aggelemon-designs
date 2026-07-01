@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
 
-const ENDPOINT = "https://portfolio-ai-chat-starter-nine.vercel.app/api/chat";
+const ENDPOINT = import.meta.env.NEXT_PUBLIC_CHAT_API_URL as string;
 const STORAGE_KEY = "lemon-chat-history";
 const MAX_HISTORY = 10;
 
