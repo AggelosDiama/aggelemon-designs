@@ -81,15 +81,23 @@ export const ChatWidget = () => {
   return (
     <>
       <button
-        aria-label={open ? "Close chat" : "Open chat"}
+        aria-label={open ? "Close chat" : "Ask about Aggelos"}
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          "fixed bottom-5 right-5 z-[60] h-14 w-14 rounded-full bg-lemon text-heading shadow-lg",
-          "flex items-center justify-center transition-all hover:scale-105 hover:shadow-xl",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lemon focus-visible:ring-offset-2"
+          "fixed bottom-5 right-5 z-[60] rounded-full bg-lemon text-heading shadow-lg",
+          "flex items-center justify-center gap-2 transition-all hover:scale-105 hover:shadow-xl",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lemon focus-visible:ring-offset-2",
+          open ? "h-14 w-14" : "h-14 px-5"
         )}
       >
-        {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
+        {open ? (
+          <X className="h-6 w-6" />
+        ) : (
+          <>
+            <MessageCircle className="h-5 w-5 shrink-0" />
+            <span className="text-sm font-semibold">Ask about Aggelos</span>
+          </>
+        )}
       </button>
 
       {open && (
