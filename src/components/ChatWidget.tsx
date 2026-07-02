@@ -8,6 +8,11 @@ type ChatMessage = { role: "user" | "assistant"; content: string };
 const ENDPOINT = import.meta.env.NEXT_PUBLIC_CHAT_API_URL as string;
 const STORAGE_KEY = "lemon-chat-history";
 const MAX_HISTORY = 10;
+const QUICK_QUESTIONS = [
+  "What kind of projects has he built?",
+  "Why both AI dev and UX?",
+  "Why the nickname Lemon?",
+];
 
 export const ChatWidget = () => {
   const [open, setOpen] = useState(false);
@@ -42,8 +47,8 @@ export const ChatWidget = () => {
     }
   }, [open, messages, loading]);
 
-  const send = async () => {
-    const text = input.trim();
+  const send = async (override?: string) => {
+    const text = (override ?? input).trim();
     if (!text || loading) return;
     const next = [...messages, { role: "user" as const, content: text }];
     setMessages(next);
@@ -123,8 +128,22 @@ export const ChatWidget = () => {
 
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
             {messages.length === 0 && (
-              <div className="text-sm text-muted-foreground text-center py-8">
-                👋 Hi! Ask me anything about my projects, skills, or experience.
+              <div className="py-4 space-y-4">
+                <div className="text-sm text-muted-foreground text-center px-2">
+                  👋 Hi! Ask me anything about my projects, skills, or experience.
+                </div>
+                <div className="flex flex-col gap-2">
+                  {QUICK_QUESTIONS.map((q) => (
+                    <button
+                      key={q}
+                      onClick={() => send(q)}
+                      disabled={loading}
+                      className="text-left text-sm rounded-xl border border-input bg-background px-3.5 py-2 hover:bg-muted hover:border-lemon transition-colors disabled:opacity-50"
+                    >
+                      {q}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
             {messages.map((m, i) => (
@@ -159,7 +178,7 @@ export const ChatWidget = () => {
                 className="flex-1 resize-none rounded-xl border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lemon max-h-32"
               />
               <Button
-                onClick={send}
+                onClick={() => send()}
                 disabled={loading || !input.trim()}
                 size="icon"
                 className="bg-lemon hover:bg-lemon/90 text-heading rounded-xl shrink-0"
