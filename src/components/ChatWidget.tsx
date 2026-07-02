@@ -7,17 +7,21 @@ type ChatMessage = { role: "user" | "assistant"; content: string };
 
 const ENDPOINT = import.meta.env.NEXT_PUBLIC_CHAT_API_URL as string;
 const STORAGE_KEY = "lemon-chat-history";
+const BUBBLE_SEEN_KEY = "lemon-chat-bubble-seen";
 const MAX_HISTORY = 10;
 const QUICK_QUESTIONS = [
   "What kind of projects has he built?",
   "Why both AI dev and UX?",
   "Why the nickname Lemon?",
 ];
+const BUBBLE_SHOW_DELAY_MS = 4500;
+const BUBBLE_AUTO_HIDE_MS = 9000;
 
 export const ChatWidget = () => {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showBubble, setShowBubble] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>(() => {
     if (typeof window === "undefined") return [];
     try {
@@ -37,6 +41,36 @@ export const ChatWidget = () => {
       /* ignore */
     }
   }, [messages]);
+
+  const dismissBubble = () => {
+    setShowBubble(false);
+    try {
+      localStorage.setItem(BUBBLE_SEEN_KEY, "1");
+    } catch {
+      /* ignore */
+    }
+  };
+
+  useEffect(() => {
+    let seen = false;
+    try {
+      seen = localStorage.getItem(BUBBLE_SEEN_KEY) === "1";
+    } catch {
+      /* ignore */
+    }
+    if (seen || messages.length > 0) return;
+
+    const showTimer = setTimeout(() => setShowBubble(true), BUBBLE_SHOW_DELAY_MS);
+    return () => clearTimeout(showTimer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (!showBubble) return;
+    const hideTimer = setTimeout(dismissBubble, BUBBLE_AUTO_HIDE_MS);
+    return () => clearTimeout(hideTimer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showBubble]);
 
   useEffect(() => {
     if (open) {
@@ -85,14 +119,44 @@ export const ChatWidget = () => {
 
   return (
     <>
+      {showBubble && !open && (
+        <div
+          role="status"
+          className="fixed bottom-24 right-5 z-[60] max-w-[220px] animate-scale-in"
+        >
+          <div className="relative bg-background border border-border rounded-2xl rounded-br-sm shadow-xl px-4 py-3">
+            <button
+              onClick={dismissBubble}
+              aria-label="Dismiss"
+              className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-muted border border-border flex items-center justify-center text-muted-foreground hover:text-foreground"
+            >
+              <X className="h-3 w-3" />
+            </button>
+            <button
+              onClick={() => {
+                setOpen(true);
+                dismissBubble();
+              }}
+              className="text-sm text-foreground leading-snug text-left hover:text-heading"
+            >
+              👋 Curious about my projects? Ask me anything!
+            </button>
+          </div>
+        </div>
+      )}
+
       <button
         aria-label={open ? "Close chat" : "Ask about Aggelos"}
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => {
+          setOpen((v) => !v);
+          dismissBubble();
+        }}
         className={cn(
           "fixed bottom-5 right-5 z-[60] rounded-full bg-lemon text-heading shadow-lg",
           "flex items-center justify-center gap-2 transition-all hover:scale-105 hover:shadow-xl",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lemon focus-visible:ring-offset-2",
-          open ? "h-14 w-14" : "h-14 px-5"
+          open ? "h-14 w-14" : "h-14 px-5",
+          showBubble && !open && "animate-glow"
         )}
       >
         {open ? (
