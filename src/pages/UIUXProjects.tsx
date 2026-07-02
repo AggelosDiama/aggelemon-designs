@@ -26,7 +26,7 @@ const UIUXProjects = () => {
     const { data, error } = await supabase
       .from("projects")
       .select("title, tags, slug, image_url, short_description")
-      .eq("category", "Product & UI/UX Design")
+      .eq("category", "Product & UI/UX")
       .eq("hidden", false)
       .eq("draft", false)
       .order("year", { ascending: false })

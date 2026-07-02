@@ -1,4 +1,5 @@
 import ReactMarkdown from "react-markdown";
+import { Highlight, themes } from "prism-react-renderer";
 import {
   Carousel,
   CarouselContent,
@@ -155,6 +156,54 @@ export const ContentBlockRenderer = ({ blocks }: ContentBlockRendererProps) => {
                 </cite>
               )}
             </blockquote>
+          )}
+
+          {block.block_type === "code" && (
+            <Highlight
+              theme={themes.vsDark}
+              code={(block.content.code || "").replace(/\n$/, "")}
+              language={block.content.language || "javascript"}
+            >
+              {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                <div className="rounded-lg overflow-hidden border border-border">
+                  <div className="px-4 py-2 text-xs font-mono text-muted-foreground bg-muted border-b border-border">
+                    {block.content.language || "javascript"}
+                  </div>
+                  <pre
+                    className={`${className} p-4 overflow-x-auto text-sm`}
+                    style={style}
+                  >
+                    {tokens.map((line, i) => (
+                      <div key={i} {...getLineProps({ line })}>
+                        {line.map((token, key) => (
+                          <span key={key} {...getTokenProps({ token })} />
+                        ))}
+                      </div>
+                    ))}
+                  </pre>
+                </div>
+              )}
+            </Highlight>
+          )}
+
+          {block.block_type === "callout" && (
+            <div className="rounded-lg bg-lemon/10 border border-lemon/30 border-l-4 border-l-lemon p-6">
+              {block.content.heading && (
+                <h4 className="text-lg font-bold text-heading mb-2">
+                  {block.content.heading}
+                </h4>
+              )}
+              {block.content.text && (
+                <p className="text-foreground leading-relaxed whitespace-pre-wrap">
+                  {block.content.text}
+                </p>
+              )}
+              {block.content.note && (
+                <p className="text-sm italic text-muted-foreground mt-4">
+                  {block.content.note}
+                </p>
+              )}
+            </div>
           )}
 
           {block.block_type === "separator" && (

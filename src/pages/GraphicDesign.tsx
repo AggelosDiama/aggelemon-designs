@@ -26,7 +26,7 @@ const GraphicDesign = () => {
     const { data, error } = await supabase
       .from("projects")
       .select("title, tags, slug, image_url, short_description")
-      .eq("category", "Visual Identity & Branding")
+      .eq("category", "Visual & Branding")
       .eq("hidden", false)
       .eq("draft", false)
       .order("year", { ascending: false })

@@ -10,9 +10,27 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { X, GripVertical, Plus } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  X,
+  GripVertical,
+  Plus,
+  Type,
+  ImageIcon,
+  Images,
+  Quote as QuoteIcon,
+  Minus,
+  Code2,
+  Megaphone,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
-export type BlockType = "text" | "image" | "gallery" | "quote" | "separator";
+export type BlockType = "text" | "image" | "gallery" | "quote" | "separator" | "code" | "callout";
 
 export interface ContentBlock {
   id: string;
@@ -27,8 +45,31 @@ interface ContentBlockEditorProps {
   onImageUpload: (file: File) => Promise<string>;
 }
 
+const BLOCK_TYPE_OPTIONS: { type: BlockType; label: string; icon: typeof Type }[] = [
+  { type: "text", label: "Rich Text", icon: Type },
+  { type: "image", label: "Image", icon: ImageIcon },
+  { type: "gallery", label: "Image Gallery", icon: Images },
+  { type: "quote", label: "Quote", icon: QuoteIcon },
+  { type: "code", label: "Code Block", icon: Code2 },
+  { type: "callout", label: "Callout", icon: Megaphone },
+  { type: "separator", label: "Separator", icon: Minus },
+];
+
+const CODE_LANGUAGES = [
+  "javascript",
+  "typescript",
+  "python",
+  "html",
+  "css",
+  "json",
+  "bash",
+  "sql",
+];
+
 export const ContentBlockEditor = ({ blocks, onChange, onImageUpload }: ContentBlockEditorProps) => {
   const [expandedBlock, setExpandedBlock] = useState<string | null>(null);
+  const [dragIndex, setDragIndex] = useState<number | null>(null);
+  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
 
   const addBlock = (type: BlockType) => {
     const newBlock: ContentBlock = {
@@ -53,6 +94,10 @@ export const ContentBlockEditor = ({ blocks, onChange, onImageUpload }: ContentB
         return { text: "", author: "" };
       case "separator":
         return { style: "line" };
+      case "code":
+        return { code: "", language: "javascript" };
+      case "callout":
+        return { heading: "Summary", text: "", note: "" };
       default:
         return {};
     }
@@ -90,6 +135,41 @@ export const ContentBlockEditor = ({ blocks, onChange, onImageUpload }: ContentB
     onChange(newBlocks.map((block, idx) => ({ ...block, order_index: idx })));
   };
 
+  const reorderBlocks = (fromIndex: number, toIndex: number) => {
+    if (fromIndex === toIndex) return;
+    const newBlocks = [...blocks];
+    const [moved] = newBlocks.splice(fromIndex, 1);
+    newBlocks.splice(toIndex, 0, moved);
+    onChange(newBlocks.map((block, idx) => ({ ...block, order_index: idx })));
+  };
+
+  const handleDragStart = (index: number) => (e: React.DragEvent) => {
+    setDragIndex(index);
+    e.dataTransfer.effectAllowed = "move";
+    // Carry the source index on the native event itself rather than relying
+    // solely on React state, since drop can fire before a state update flushes.
+    e.dataTransfer.setData("text/plain", String(index));
+  };
+
+  const handleDragOver = (index: number) => (e: React.DragEvent) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    if (index !== dragOverIndex) setDragOverIndex(index);
+  };
+
+  const handleDrop = (index: number) => (e: React.DragEvent) => {
+    e.preventDefault();
+    const sourceIndex = Number(e.dataTransfer.getData("text/plain"));
+    if (!Number.isNaN(sourceIndex)) reorderBlocks(sourceIndex, index);
+    setDragIndex(null);
+    setDragOverIndex(null);
+  };
+
+  const handleDragEnd = () => {
+    setDragIndex(null);
+    setDragOverIndex(null);
+  };
+
   const handleImageFileUpload = async (
     blockId: string,
     file: File,
@@ -115,18 +195,21 @@ export const ContentBlockEditor = ({ blocks, onChange, onImageUpload }: ContentB
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-semibold text-heading">Content Blocks</h3>
-        <Select onValueChange={(value) => addBlock(value as BlockType)}>
-          <SelectTrigger className="w-48">
-            <SelectValue placeholder="Add Block" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="text">Rich Text</SelectItem>
-            <SelectItem value="image">Image</SelectItem>
-            <SelectItem value="gallery">Image Gallery</SelectItem>
-            <SelectItem value="quote">Quote</SelectItem>
-            <SelectItem value="separator">Separator</SelectItem>
-          </SelectContent>
-        </Select>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button type="button" variant="outline" size="sm">
+              <Plus className="w-4 h-4 mr-1" /> Add Block
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {BLOCK_TYPE_OPTIONS.map(({ type, label, icon: Icon }) => (
+              <DropdownMenuItem key={type} onClick={() => addBlock(type)}>
+                <Icon className="w-4 h-4 mr-2" />
+                {label}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
       {blocks.length === 0 && (
@@ -139,11 +222,22 @@ export const ContentBlockEditor = ({ blocks, onChange, onImageUpload }: ContentB
         {blocks.map((block, index) => (
           <div
             key={block.id}
-            className="border border-border rounded-lg p-4 bg-card"
+            draggable
+            onDragStart={handleDragStart(index)}
+            onDragOver={handleDragOver(index)}
+            onDrop={handleDrop(index)}
+            onDragEnd={handleDragEnd}
+            className={cn(
+              "border rounded-lg p-4 bg-card transition-all",
+              dragIndex === index ? "opacity-40 border-border" : "border-border",
+              dragOverIndex === index && dragIndex !== index
+                ? "border-lemon border-2"
+                : ""
+            )}
           >
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
-                <GripVertical className="w-5 h-5 text-muted-foreground cursor-move" />
+                <GripVertical className="w-5 h-5 text-muted-foreground cursor-grab active:cursor-grabbing" />
                 <span className="font-medium text-heading capitalize">
                   {block.block_type.replace("_", " ")}
                 </span>
@@ -366,6 +460,80 @@ export const ContentBlockEditor = ({ blocks, onChange, onImageUpload }: ContentB
                           })
                         }
                         placeholder="Quote author"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {block.block_type === "code" && (
+                  <div className="space-y-3">
+                    <div className="space-y-2">
+                      <Label>Language</Label>
+                      <Select
+                        value={block.content.language || "javascript"}
+                        onValueChange={(value) =>
+                          updateBlock(block.id, { ...block.content, language: value })
+                        }
+                      >
+                        <SelectTrigger className="w-48">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {CODE_LANGUAGES.map((lang) => (
+                            <SelectItem key={lang} value={lang}>
+                              {lang}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-2">
+                      <Label>Code</Label>
+                      <Textarea
+                        value={block.content.code || ""}
+                        onChange={(e) =>
+                          updateBlock(block.id, { ...block.content, code: e.target.value })
+                        }
+                        rows={8}
+                        placeholder="Paste or write code..."
+                        className="font-mono text-sm"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {block.block_type === "callout" && (
+                  <div className="space-y-3">
+                    <div className="space-y-2">
+                      <Label>Heading</Label>
+                      <Input
+                        value={block.content.heading || ""}
+                        onChange={(e) =>
+                          updateBlock(block.id, { ...block.content, heading: e.target.value })
+                        }
+                        placeholder="Summary"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label>Text</Label>
+                      <Textarea
+                        value={block.content.text || ""}
+                        onChange={(e) =>
+                          updateBlock(block.id, { ...block.content, text: e.target.value })
+                        }
+                        rows={4}
+                        placeholder="Callout body text..."
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label>Note (optional, shown in italics)</Label>
+                      <Textarea
+                        value={block.content.note || ""}
+                        onChange={(e) =>
+                          updateBlock(block.id, { ...block.content, note: e.target.value })
+                        }
+                        rows={2}
+                        placeholder="e.g. an NDA disclaimer"
                       />
                     </div>
                   </div>

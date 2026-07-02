@@ -27,7 +27,7 @@ const AITools = () => {
     const { data, error } = await supabase
       .from("projects")
       .select("title, tags, slug, image_url, short_description")
-      .eq("category", "AI Engineering & Agents")
+      .eq("category", "AI Engineering")
       .eq("hidden", false)
       .eq("draft", false)
       .order("year", { ascending: false })
