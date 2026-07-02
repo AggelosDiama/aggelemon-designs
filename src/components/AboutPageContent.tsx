@@ -34,11 +34,24 @@ const lemonFacts = [
   "When I start making puns, it means I'm comfortable with you.",
 ];
 
+const experienceItems = [
+  {
+    title: "AI Engineer",
+    institution: "Datalink OE — Athens, Hybrid (Mar–Jun 2026)",
+    detail: "Engineered an AI agent to process complex enterprise datasets, actively identifying and mitigating hallucination risks to ensure high-fidelity outputs, and explored how AI can automate ERP-driven business workflows.",
+  },
+];
+
 const educationItems = [
   {
     title: "MEng in Computer Engineering",
     institution: "University of Patras (CEID)",
     detail: "Thesis: Designing and developing an AI-powered tutoring experience for coding assignments.",
+  },
+  {
+    title: "AI Engineer Core Track",
+    institution: "Ligency — Ed Donner",
+    detail: "33.5-hour online program covering LLM Engineering, RAG pipelines, QLoRA fine-tuning, and autonomous agents.",
   },
   {
     title: "AI Engineering Academy",
@@ -60,6 +73,7 @@ const educationItems = [
 export const aboutSections = [
   { id: "professional-story", label: "Professional Story" },
   { id: "my-approach", label: "My Approach" },
+  { id: "experience", label: "Experience" },
   { id: "education-training", label: "Education & Training" },
   { id: "skills-and-facts", label: "Skills & Lemon Facts" },
   { id: "contact", label: "Contact" },
@@ -158,12 +172,34 @@ export const AboutPageContent = () => {
 
         <Separator className="my-12" />
 
+        {/* Experience */}
+        <div id="experience" className="scroll-mt-24">
+          <h3 className="text-2xl font-bold text-heading mb-6">Experience</h3>
+          <div className="space-y-6">
+            {experienceItems.map((item, index) => (
+              <div
+                key={index}
+                className="p-5 rounded-lg bg-background border border-border shadow-sm hover:shadow-md hover:border-lemon/40 transition-all duration-300"
+              >
+                <h4 className="text-lg font-bold text-heading">{item.title}</h4>
+                <p className="text-sm text-muted-foreground font-mono mt-1">{item.institution}</p>
+                <p className="text-foreground leading-relaxed mt-2">{item.detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <Separator className="my-12" />
+
         {/* Education & Training */}
         <div id="education-training" className="scroll-mt-24">
           <h3 className="text-2xl font-bold text-heading mb-6">Education & Training</h3>
           <div className="space-y-6">
             {educationItems.map((item, index) => (
-              <div key={index} className="p-5 rounded-lg bg-card border border-border">
+              <div
+                key={index}
+                className="p-5 rounded-lg bg-background border border-border shadow-sm hover:shadow-md hover:border-lemon/40 transition-all duration-300"
+              >
                 <h4 className="text-lg font-bold text-heading">{item.title}</h4>
                 <p className="text-sm text-muted-foreground font-mono mt-1">{item.institution}</p>
                 <p className="text-foreground leading-relaxed mt-2">{item.detail}</p>
