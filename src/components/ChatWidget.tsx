@@ -15,7 +15,7 @@ const QUICK_QUESTIONS = [
   "Why the nickname Lemon?",
 ];
 const BUBBLE_SHOW_DELAY_MS = 4500;
-const BUBBLE_AUTO_HIDE_MS = 9000;
+const BUBBLE_AUTO_HIDE_MS = 30000;
 
 export const ChatWidget = () => {
   const [open, setOpen] = useState(false);
@@ -152,8 +152,10 @@ export const ChatWidget = () => {
           dismissBubble();
         }}
         className={cn(
-          "fixed bottom-5 right-5 z-[60] rounded-full bg-lemon text-heading shadow-lg",
-          "flex items-center justify-center gap-2 transition-all hover:scale-105 hover:shadow-xl",
+          "fixed bottom-5 right-5 z-[60] rounded-full bg-lemon text-heading",
+          "shadow-[0_0_16px_4px_rgba(255,255,255,0.8),0_10px_15px_-3px_rgba(0,0,0,0.15)]",
+          "hover:shadow-[0_0_22px_6px_rgba(255,255,255,0.9),0_10px_15px_-3px_rgba(0,0,0,0.15)]",
+          "flex items-center justify-center gap-2 transition-all hover:scale-105",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lemon focus-visible:ring-offset-2",
           open ? "h-14 w-14" : "h-14 px-5",
           showBubble && !open && "animate-glow"
